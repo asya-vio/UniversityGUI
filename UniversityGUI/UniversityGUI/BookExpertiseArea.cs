@@ -13,6 +13,7 @@ namespace UniversityGUI
 
         public BookExpertiseArea(string Name)
         {
+            this.Name = Name;
             List<Book> ListOfBook = new List<Book>();
 
         }

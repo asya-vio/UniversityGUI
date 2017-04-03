@@ -12,7 +12,7 @@ namespace UniversityGUI
 
         public BookCatalog()
         {
-            List<BookExpertiseArea> ListOfExpertiseArea = new List<BookExpertiseArea>();
+            ListOfExpertiseArea = new List<BookExpertiseArea>();
         }
 
         public void AddExpertiseArea()
@@ -42,35 +42,13 @@ namespace UniversityGUI
                 Console.WriteLine("Нет такой области знаний!");
         }
 
-        public Book FindBook()
+        private Book FindByAuthor()
         {
-            Console.WriteLine("Введите 1, если хотите искать по названию книги");
-            Console.WriteLine("Введите 2, если хотите искать по авторам книги");
-
-            int choice = int.Parse(Console.ReadLine());
-            if (choice == 1)
+            List<string> authors = new List<string>();
+            Console.WriteLine("Введите введите количество авторов книги");
+            int numb = int.Parse(Console.ReadLine());
+            try
             {
-                Console.WriteLine("Введите навание книги");
-                string name = Console.ReadLine();
-
-                for (int i = 0; i < ListOfExpertiseArea.Count; i++)
-                {
-                    for (int j = 0; j < ListOfExpertiseArea[i].ListOfBook.Count; j++)
-                    {
-                        if (ListOfExpertiseArea[i].ListOfBook[j].Name == name)
-                            return ListOfExpertiseArea[i].ListOfBook[j];
-                    }
-                }
-                Console.WriteLine("Такой книги нет в каталоге!");
-                Console.ReadLine();
-
-            }
-            else if (choice == 2)
-            {
-                List<string> authors = new List<string>();
-                Console.WriteLine("Введите введите количество авторов книги");
-                int numb = int.Parse(Console.ReadLine());
-
                 for (int i = 0; i < numb; i++)
                 {
                     Console.WriteLine("Введите фамилию {1} автора книги", i);
@@ -82,19 +60,61 @@ namespace UniversityGUI
                 {
                     for (int j = 0; j < ListOfExpertiseArea[i].ListOfBook.Count; j++)
                     {
-                       if (ListOfExpertiseArea[i].ListOfBook[j].Author.SequenceEqual(authors))
+                        if (ListOfExpertiseArea[i].ListOfBook[j].Author.SequenceEqual(authors))
                             return ListOfExpertiseArea[i].ListOfBook[j];
                     }
                 }
-                Console.WriteLine("Такой книги нет в каталоге!");
-                Console.ReadLine();
+                throw new ArgumentException("Такой книги нет в каталоге!");
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine(ex.Message);
+                string[] st = { "-1" };
+                return new Book("-1", st, "-1");
+            }
+        }
+
+        private Book FindByName()
+        {
+            Console.WriteLine("Введите навание книги");
+            string name = Console.ReadLine();
+            try
+            {
+                for (int i = 0; i < ListOfExpertiseArea.Count; i++)
+                {
+                    for (int j = 0; j < ListOfExpertiseArea[i].ListOfBook.Count; j++)
+                    {
+                        if (ListOfExpertiseArea[i].ListOfBook[j].Name == name)
+                            return ListOfExpertiseArea[i].ListOfBook[j];                   
+                    }
+                }
+                throw new ArgumentException("Такой книги нет в каталоге!");
+
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine(ex.Message);
+                string[] st = { "-1" };
+                return new Book("-1", st, "-1");
+            }
+        }
+
+        public Book FindBook()
+        {
+            Console.WriteLine("Введите 1, если хотите искать по названию книги");
+            Console.WriteLine("Введите 2, если хотите искать по авторам книги");
+
+            int choice = int.Parse(Console.ReadLine());
+            if (choice == 1)
+            {
+                var book = FindByName();
+                    return book;
             }
             else
             {
-                Console.WriteLine("Такого пункта нет в меню!");
-                Console.ReadLine();
-                FindBook();
-            }
+                var book = FindByAuthor();
+                return book;
+            }      
         }
 
         public void Print()

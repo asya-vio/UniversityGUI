@@ -22,11 +22,13 @@ namespace UniversityGUI
             List<int> numb = new List<int>();
             for (int i = 0; i < 10; i++)
                 numb.Add(i);
-
+            Console.WriteLine("{0}", numb.Count);
             numb.RemoveAt(5);
 
             for (int i = 0; i < numb.Count; i++)
                 Console.WriteLine("{0}", numb[i]);
+
+            Console.WriteLine("{0}", numb.Count);
         }
     }
 }
