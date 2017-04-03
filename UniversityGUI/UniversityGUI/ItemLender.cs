@@ -8,6 +8,7 @@ namespace UniversityGUI
 {
     class ItemLender
     {
+        public int IDLender;
         //public List<ItemLending> LandedItem;
         //public ItemLenderBase DataBase;
         public ItemLender()
