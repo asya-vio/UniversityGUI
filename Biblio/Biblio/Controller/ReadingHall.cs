@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UniversityGUI
+namespace Biblio.Controller
 {
-    class ReadingHall : ItemLender
+    class ReadingHall // : ItemLender
     {
 
     }

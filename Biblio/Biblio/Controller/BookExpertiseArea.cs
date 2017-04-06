@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UniversityGUI
+namespace Biblio
 {
     class BookExpertiseArea
     {
@@ -15,27 +15,28 @@ namespace UniversityGUI
         {
             this.Name = Name;
             List<Book> ListOfBook = new List<Book>();
-
         }
 
-        public void AddBook()
+        public void AddBook(Book TheBook)
         {
-            List<string> authors = new List<string>(); 
+            //List<string> authors = new List<string>();
 
-            Console.WriteLine("Введите введите название книги");
-            string name = Console.ReadLine();
+            //Console.WriteLine("Введите введите название книги");
+            //string name = Console.ReadLine();
 
-            Console.WriteLine("Введите введите количество авторов книги");
-            int numb = int.Parse(Console.ReadLine());
+            //Console.WriteLine("Введите введите количество авторов книги");
+            //int numb = int.Parse(Console.ReadLine());
 
-            for (int i = 0; i < numb; i++)
-            {
-                Console.WriteLine("Введите фамилию {1} автора книги", i);
-                string author = Console.ReadLine();
-                authors.Add(author);
-            }
+            //for (int i = 0; i < numb; i++)
+            //{
+            //    Console.WriteLine("Введите фамилию {1} автора книги", i);
+            //    string author = Console.ReadLine();
+            //    authors.Add(author);
+            //}
 
-            ListOfBook.Add(new Book(name, authors.ToArray(), Name));
+            //ListOfBook.Add(new Book(name, authors.ToArray(), Name));
+
+            ListOfBook.Add(TheBook);
         }
 
         public void DeleteBook()
@@ -50,7 +51,7 @@ namespace UniversityGUI
 
             for (int i = 0; i < numb; i++)
             {
-                Console.WriteLine("Введите фамилию {1} автора книги", i+1);
+                Console.WriteLine("Введите фамилию {1} автора книги", i + 1);
                 string author = Console.ReadLine();
                 authors.Add(author);
             }

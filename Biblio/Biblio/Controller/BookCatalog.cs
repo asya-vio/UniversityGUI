@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UniversityGUI
+namespace Biblio
 {
     class BookCatalog
     {
@@ -85,7 +85,7 @@ namespace UniversityGUI
                     for (int j = 0; j < ListOfExpertiseArea[i].ListOfBook.Count; j++)
                     {
                         if (ListOfExpertiseArea[i].ListOfBook[j].Name == name)
-                            return ListOfExpertiseArea[i].ListOfBook[j];                   
+                            return ListOfExpertiseArea[i].ListOfBook[j];
                     }
                 }
                 throw new ArgumentException("Такой книги нет в каталоге!");
@@ -108,13 +108,13 @@ namespace UniversityGUI
             if (choice == 1)
             {
                 var book = FindByName();
-                    return book;
+                return book;
             }
             else
             {
                 var book = FindByAuthor();
                 return book;
-            }      
+            }
         }
 
         public void Print()
@@ -124,7 +124,7 @@ namespace UniversityGUI
                 Console.WriteLine("Область знаний {0}", ListOfExpertiseArea[i]);
                 for (int j = 0; j < ListOfExpertiseArea[i].ListOfBook.Count; j++)
                 {
-                    Console.WriteLine("Книга  {0}", ListOfExpertiseArea[i].ListOfBook[j]);                   
+                    Console.WriteLine("Книга  {0}", ListOfExpertiseArea[i].ListOfBook[j]);
                 }
                 Console.WriteLine();
             }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UniversityGUI
+namespace Biblio.Controller
 {
     class Library
     {
@@ -13,8 +13,8 @@ namespace UniversityGUI
 
         public Library()
         {
-            List<LibraryDepartment> ListLibraryDept = new List<LibraryDepartment>();
-            List<ReadingHall> ListReadingHall = new List<ReadingHall>();
+            ListLibraryDept = new List<LibraryDepartment>();
+            ListReadingHall = new List<ReadingHall>();
         }
 
         public void AddLibraryDept()
@@ -26,6 +26,5 @@ namespace UniversityGUI
         {
 
         }
-
-     }
+    }
 }
