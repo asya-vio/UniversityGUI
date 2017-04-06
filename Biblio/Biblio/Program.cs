@@ -6,17 +6,24 @@ using System.Windows.Forms;
 
 namespace Biblio
 {
-    static class Program
+   public static class Program
     {
+
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
         [STAThread]
-        static void Main()
+        public static void Main()
         {
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new CreateStudent());
+
+
+
+
+
         }
     }
 }

@@ -12,10 +12,15 @@ namespace Biblio
 {
     public partial class CreateStudentPass : Form
     {
+        TextBox IDPassBox;
+        TextBox IDLibraryBox;
+        Button CreatePassButton;
+        Student student;
+
         public CreateStudentPass(Student student)
         {
             InitializeComponent();
-
+            this.student = student;
 
             var IDPassLabel = new Label
             {
@@ -23,7 +28,7 @@ namespace Biblio
                 Dock = DockStyle.Fill
             };
 
-            var IDPassBox = new TextBox
+            this.IDPassBox = new TextBox
             {
                 Width = 300,
                 Dock = DockStyle.Left,
@@ -31,17 +36,17 @@ namespace Biblio
 
             var IDLibraryLabel = new Label
             {
-                Text = "Номер библиотеки",
+                Text = "Номер библиотеки или читального зала",
                 Dock = DockStyle.Fill
             };
 
-            var IDLibraryBox = new TextBox
+            this.IDLibraryBox = new TextBox
             {
                 Width = 250,
                 Dock = DockStyle.Left,
             };
 
-            var CreatePassButton = new Button
+            this.CreatePassButton = new Button
             {
                 Text = "Зарегистрировать билет",
                 BackColor = Color.Chocolate,
@@ -72,6 +77,16 @@ namespace Biblio
             table.Dock = DockStyle.Fill;
             Controls.Add(table);
 
+            CreatePassButton.Click += CreatePassButton_Click;
+
+        }
+
+        void CreatePassButton_Click(object sender, EventArgs e)
+        {
+            StudentPass studentPass = new StudentPass(student, int.Parse(IDPassBox.Text), int.Parse(IDLibraryBox.Text));
+
+            
+            //throw new NotImplementedException();
         }
     }
 }

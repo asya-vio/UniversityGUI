@@ -6,8 +6,16 @@ using System.Threading.Tasks;
 
 namespace Biblio
 {
-    class LibraryDepartment // : ItemLender
+    class LibraryDepartment : ItemLender
     {
+
+        public LibraryDepartment(ItemLenderBase dataBase) : base (dataBase)
+        {
+            this.DataBase = dataBase;
+
+            LendedItem = new List<ItemLending>();
+
+        }
 
     }
 }

@@ -168,19 +168,21 @@ namespace Biblio
 
         void CreatingStudentButton_OnClick(object sender, EventArgs e)
         {
-            string lastName = LastNameBox.Text;
-            string name = NameBox.Text;
-            string secondName = SecondNameBox.Text;
+            //string lastName = LastNameBox.Text;
+            //string name = NameBox.Text;
+            //string secondName = SecondNameBox.Text;
 
-            string address = AddressBox.Text;
-            string phoneNumb = PhoneNumberBox.Text;
-            int IDcard = int.Parse(IDCardBox.Text);
-            string faculty = FacultyBox.Text;
-            int course = int.Parse(CourseBox.Text);
+            //string address = AddressBox.Text;
+            //string phoneNumb = PhoneNumberBox.Text;
+            //int IDcard = int.Parse(IDCardBox.Text);
+            //string faculty = FacultyBox.Text;
+            //int course = int.Parse(CourseBox.Text);
 
-            Student student = new Student(lastName, name, secondName, address, phoneNumb, IDcard, faculty, course);
+            Student student = new Student(LastNameBox.Text, NameBox.Text, SecondNameBox.Text, 
+                AddressBox.Text, PhoneNumberBox.Text, int.Parse(IDCardBox.Text), FacultyBox.Text, int.Parse(CourseBox.Text));
 
-            Application.Run(new CreateStudentPass(student));
+            Form studentPass = new CreateStudentPass(student);
+            studentPass.ShowDialog();
 
             //throw new NotImplementedException();
         }

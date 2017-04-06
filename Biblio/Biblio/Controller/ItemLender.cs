@@ -8,7 +8,7 @@ namespace Biblio
 {
     class ItemLender
     {
-        //public int IDLender;
+        public int IDLender;
 
         public List<ItemLending> LendedItem;
 
