@@ -23,22 +23,22 @@ namespace Biblio
             ExpertiseArea = expertiseArea;
         }
 
-        public void AddExemplar(int DatePublish, string InvNumber)
+        public void AddExemplar(int PublicationDate, int InventoryNumber)
         {
             //Console.WriteLine("Введите год издания экземпляра");
             //int date = int.Parse(Console.ReadLine());
 
-            ListOfExemplar.Add(new BookExemplar(DatePublish, InvNumber));
+            ListOfExemplar.Add(new BookExemplar(PublicationDate, InventoryNumber));
         }
 
-        public void DeleteExemplar(string InvNumber)
+        public void DeleteExemplar(int InventoryNumber)
         {
             //Console.WriteLine("Введите инвентарный номер экземпляра");
             //int inventoryNumb = int.Parse(Console.ReadLine());
 
             for (int i = 0; i < ListOfExemplar.Count; i++)
             {
-                if (ListOfExemplar[i].InventoryNumber == InvNumber)
+                if (ListOfExemplar[i].InventoryNumber == InventoryNumber)
                 {
                     ListOfExemplar.RemoveAt(i);
                     break;

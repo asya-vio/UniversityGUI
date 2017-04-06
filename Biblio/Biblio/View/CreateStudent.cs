@@ -24,7 +24,7 @@ namespace Biblio
 
         public CreateStudent()
         {
-            BackColor = Color.CadetBlue;
+            BackColor = Color.AntiqueWhite;
             WindowState = FormWindowState.Maximized;
 
             InitializeComponent();

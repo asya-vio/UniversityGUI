@@ -14,9 +14,9 @@ namespace Biblio
 
         public StudentPass Pass { get; set; }
 
-        public Student (string lastname, string name, string secondname, string adress, string phonenumber,
+        public Student (string lastName, string name, string secondName, string address, string phoneNumber,
             int IDStudentCard, string Faculty, int Course)
-            : base(lastname, name, secondname, adress, phonenumber)
+            : base(lastName, name, secondName, address, phoneNumber)
         {
             if (IDStudentCard <= 0) throw new Exception("Неверный ID карты студента");
 

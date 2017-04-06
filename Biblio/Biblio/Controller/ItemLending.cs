@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Biblio
 {
-    class ItemLanding
+    class ItemLending
     {
-        public int IDLanding { get; set; }
+        public int IDLending { get; set; }
 
-        public DateTime LandingDate { get; set; }
+        public DateTime LendingDate { get; set; }
 
         public DateTime ReturnDate { get; set; }
 
@@ -20,19 +20,19 @@ namespace Biblio
 
         public int IDPass { get; set; }
 
-        public bool IsStud { get; set; }
+        public bool IsStudent { get; set; }
 
-        public string InventoryNumber { get; set; }
+        public int InventoryNumber { get; set; }
 
-        public ItemLanding
-            (int ID, DateTime LandDate, DateTime RetDate, int IDLib, int EmpNum, 
-            int IDPass, bool IsStud, string InvNum)
+        public ItemLending
+            (int ID, DateTime LendDate, DateTime RetDate, int IDLib, int EmpNum, 
+            int IDPass, bool IsStud, int InventoryNumber)
         {
-            IDLanding = ID;
+            IDLending = ID;
 
-            LandingDate = LandDate;
+            LendingDate = LendDate;
 
-            ReturnDate = LandDate;
+            ReturnDate = LendDate;
 
             IDLibrary = IDLib;
 
@@ -40,9 +40,9 @@ namespace Biblio
 
             this.IDPass = IDPass;
 
-            this.IsStud = IsStud;
+            this.IsStudent = IsStud;
 
-            InventoryNumber = InvNum;
+            this.InventoryNumber = InventoryNumber;
         }
 
         public void ExtendDate (int days)

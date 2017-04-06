@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Biblio.Controller
+namespace Biblio
 {
     class Teacher : Man
     {
@@ -14,9 +14,9 @@ namespace Biblio.Controller
 
         public TeacherPass Pass { get; set; }
 
-        public Teacher(string lastname, string name, string secondname, string adress, string phonenumber,
+        public Teacher(string lastName, string name, string secondName, string address, string phoneNumber,
             int TeacherNumber, string Faculty, string Job)
-            : base(lastname, name, secondname, adress, phonenumber)
+            : base(lastName, name, secondName, address, phoneNumber)
         {
             if (TeacherNumber <= 0) throw new Exception("Неверный ID карты преподавателя");
 

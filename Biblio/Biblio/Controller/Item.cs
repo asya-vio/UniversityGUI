@@ -12,7 +12,7 @@ namespace Biblio
    
         public presence Presence { get; set; }
 
-        public string InventoryNumber;
+        public int InventoryNumber;
 
     }
 }

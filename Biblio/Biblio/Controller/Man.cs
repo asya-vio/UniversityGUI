@@ -12,10 +12,10 @@ namespace Biblio
         public string LastName { get; set; }
         public string Name { get; set; }
         public string SecondName { get; set; }
-        public string Adress { get; set; }
+        public string Address { get; set; }
         public string PhoneNumber { get; set; }
 
-        public Man (string lastname, string name, string secondname, string adress,
+        public Man (string lastName, string name, string secondName, string address,
             string phonenumber)
         {
             //if (string.IsNullOrEmpty(name)) throw new Exception("Неверное имя человека!");
@@ -24,10 +24,10 @@ namespace Biblio
 
             //if (!reg.IsMatch(PhoneNumber)) throw new Exception("Неверный номер телефона!");
 
-            this.LastName = lastname;
+            this.LastName = lastName;
             this.Name = name;
-            this.SecondName = secondname;
-            this.Adress = adress;
+            this.SecondName = secondName;
+            this.Address = address;
             this.PhoneNumber = phonenumber;
         }
 

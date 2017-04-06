@@ -50,7 +50,7 @@
     <Compile Include="Controller\BookExpertiseArea.cs" />
     <Compile Include="Controller\Employee.cs" />
     <Compile Include="Controller\Item.cs" />
-    <Compile Include="Controller\ItemLanding.cs" />
+    <Compile Include="Controller\ItemLending.cs" />
     <Compile Include="Controller\ItemLender.cs" />
     <Compile Include="Controller\ItemLenderBase.cs" />
     <Compile Include="Controller\Library.cs" />
