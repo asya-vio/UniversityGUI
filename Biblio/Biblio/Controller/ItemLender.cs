@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Biblio
 {
-    class ItemLender
+    public class ItemLender
     {
         public int IDLender;
 

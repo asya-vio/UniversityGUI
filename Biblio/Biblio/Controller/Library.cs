@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Biblio
 {
-    class Library
+    public class Library
     {
         List<LibraryDepartment> ListLibraryDept;
         List<ReadingHall> ListReadingHall;

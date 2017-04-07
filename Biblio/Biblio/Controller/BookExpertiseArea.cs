@@ -6,71 +6,36 @@ using System.Threading.Tasks;
 
 namespace Biblio
 {
-    class BookExpertiseArea
+    public class BookExpertiseArea
     {
         public string Name;
-        public List<Book> ListOfBook;
+        public List<Book> ListOfBook = new List<Book>();
 
-        public BookExpertiseArea(string Name)
+        public BookExpertiseArea(string name)
         {
-            this.Name = Name;
-            List<Book> ListOfBook = new List<Book>();
+            this.Name = name;
         }
 
-        public void AddBook(Book TheBook)
+        public void AddBook(Book book)
         {
-            //List<string> authors = new List<string>();
-
-            //Console.WriteLine("Введите введите название книги");
-            //string name = Console.ReadLine();
-
-            //Console.WriteLine("Введите введите количество авторов книги");
-            //int numb = int.Parse(Console.ReadLine());
-
-            //for (int i = 0; i < numb; i++)
-            //{
-            //    Console.WriteLine("Введите фамилию {1} автора книги", i);
-            //    string author = Console.ReadLine();
-            //    authors.Add(author);
-            //}
-
-            //ListOfBook.Add(new Book(name, authors.ToArray(), Name));
-
-            ListOfBook.Add(TheBook);
+            ListOfBook.Add(book);
         }
 
-        public void DeleteBook()
+        public void DeleteBook(Book book)
         {
-            List<string> authors = new List<string>();
-
-            Console.WriteLine("Введите введите название книги");
-            string name = Console.ReadLine();
-
-            Console.WriteLine("Введите введите количество авторов книги");
-            int numb = int.Parse(Console.ReadLine());
-
-            for (int i = 0; i < numb; i++)
-            {
-                Console.WriteLine("Введите фамилию {1} автора книги", i + 1);
-                string author = Console.ReadLine();
-                authors.Add(author);
-            }
 
             for (int i = 0; i < ListOfBook.Count; i++)
             {
-                if (ListOfBook[i].Name == name)
+                if (ListOfBook[i].Name == book.Name)
                 {
-                    if (ListOfBook[i].Author.SequenceEqual(authors))
+                    if (ListOfBook[i].Author.SequenceEqual(book.Author))
                     {
                         ListOfBook.RemoveAt(i);
-                        Console.WriteLine("Книга успешно удалена");
                         return;
                     }
 
                 }
             }
-            Console.WriteLine("Нет такой кники!");
-            Console.ReadLine();
             return;
         }
     }

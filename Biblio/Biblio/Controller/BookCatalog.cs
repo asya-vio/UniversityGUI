@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Biblio
 {
-    class BookCatalog
+    public class BookCatalog
     {
         public List<BookExpertiseArea> ListOfExpertiseArea;
 
@@ -15,12 +15,13 @@ namespace Biblio
             ListOfExpertiseArea = new List<BookExpertiseArea>();
         }
 
-        public void AddExpertiseArea()
+        public void AddExpertiseArea(string NameOfArea)
         {
-            Console.WriteLine("Введите название новой области");
-            var name = Console.ReadLine();
+            ListOfExpertiseArea.Add(new BookExpertiseArea(NameOfArea));
+            //Console.WriteLine("Введите название новой области");
+            //var name = Console.ReadLine();
 
-            ListOfExpertiseArea.Add(new BookExpertiseArea(name));
+            //ListOfExpertiseArea.Add(new BookExpertiseArea(name));
 
         }
 
@@ -70,7 +71,7 @@ namespace Biblio
             {
                 Console.WriteLine(ex.Message);
                 string[] st = { "-1" };
-                return new Book("-1", st, "-1");
+                return new Book("-1", st);
             }
         }
 
@@ -95,7 +96,7 @@ namespace Biblio
             {
                 Console.WriteLine(ex.Message);
                 string[] st = { "-1" };
-                return new Book("-1", st, "-1");
+                return new Book("-1", st);
             }
         }
 

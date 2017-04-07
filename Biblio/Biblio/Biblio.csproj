@@ -62,6 +62,12 @@
     <Compile Include="Controller\StudentPass.cs" />
     <Compile Include="Controller\Teacher.cs" />
     <Compile Include="Controller\TeacherPass.cs" />
+    <Compile Include="View\ShowCatalog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ShowCatalog.Designer.cs">
+      <DependentUpon>ShowCatalog.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\CreateStudent.cs">
       <SubType>Form</SubType>
     </Compile>

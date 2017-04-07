@@ -12,10 +12,21 @@ namespace Biblio
 {
     public partial class CreateTeacher : Form
     {
+        TextBox LastNameBox;
+        TextBox NameBox;
+        TextBox SecondNameBox;
+        TextBox AddressBox;
+        TextBox PhoneNumberBox;
+        TextBox TeacherNumbBox;
+        TextBox FacultyBox;
+        TextBox JobBox;
+        Button CreatingTeacherButton;
+
         public CreateTeacher()
         {
-            BackColor = Color.CadetBlue;
-            WindowState = FormWindowState.Maximized;
+            BackColor = Color.AntiqueWhite;
+            //WindowState = FormWindowState.Maximized;
+            this.Size = new Size(250, 500);
 
             InitializeComponent();
 
@@ -25,7 +36,7 @@ namespace Biblio
                 Dock = DockStyle.Left
             };
 
-            var LastNameBox = new TextBox
+            this.LastNameBox = new TextBox
             {
                 Width = 250,
                 Dock = DockStyle.Left,
@@ -37,7 +48,7 @@ namespace Biblio
                 Dock = DockStyle.Fill
             };
 
-            var NameBox = new TextBox
+            this.NameBox = new TextBox
             {
                 Width = 250,
                 Dock = DockStyle.Left,
@@ -49,7 +60,7 @@ namespace Biblio
                 Dock = DockStyle.Fill
             };
 
-            var SecondNameBox = new TextBox
+            this.SecondNameBox = new TextBox
             {
                 Width = 250,
                 Dock = DockStyle.Left,
@@ -61,7 +72,7 @@ namespace Biblio
                 Dock = DockStyle.Left
             };
 
-            var AddressBox = new TextBox
+            this.AddressBox = new TextBox
             {
                 Width = 250,
                 Dock = DockStyle.Left
@@ -73,7 +84,7 @@ namespace Biblio
                 Dock = DockStyle.Fill
             };
 
-            var PhoneNumberBox = new TextBox
+            this.PhoneNumberBox = new TextBox
             {
                 Dock = DockStyle.Fill,
             };
@@ -84,7 +95,7 @@ namespace Biblio
                 Dock = DockStyle.Fill
             };
 
-            var TeacherNumberBox = new TextBox
+            this.TeacherNumbBox = new TextBox
             {
                 Dock = DockStyle.Fill,
             };
@@ -95,7 +106,7 @@ namespace Biblio
                 Dock = DockStyle.Fill
             };
 
-            var FacultyBox = new TextBox
+            this.FacultyBox = new TextBox
             {
                 Dock = DockStyle.Fill,
             };
@@ -106,13 +117,13 @@ namespace Biblio
                 Dock = DockStyle.Fill
             };
 
-            var JobBox = new TextBox
+            this.JobBox = new TextBox
             {
                 Width = 250,
                 Dock = DockStyle.Fill,
             };
 
-            var CreatingStudentButton = new Button
+            this.CreatingTeacherButton = new Button
             {
                 Text = "Внести в базу",
                 BackColor = Color.Chocolate,
@@ -123,23 +134,10 @@ namespace Biblio
             var table = new TableLayoutPanel();
             table.RowStyles.Clear();
             table.RowStyles.Add(new RowStyle(SizeType.Percent, 50));
-            table.RowStyles.Add(new RowStyle(SizeType.AutoSize, 30));
-            table.RowStyles.Add(new RowStyle(SizeType.AutoSize, 30));
-            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
-            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
-            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
-            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
-            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
-            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
-            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
-            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
-            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
-            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
-            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
-            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
-            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
-            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
-            table.RowStyles.Add(new RowStyle(SizeType.AutoSize, 30));
+            for (int i = 0; i < 17; i++)
+            {
+                table.RowStyles.Add(new RowStyle(SizeType.AutoSize, 30));
+            }
             table.RowStyles.Add(new RowStyle(SizeType.Percent, 50));
             table.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
 
@@ -155,16 +153,28 @@ namespace Biblio
             table.Controls.Add(PhoneNumberLabel, 0, 9);
             table.Controls.Add(PhoneNumberBox, 0, 10);
             table.Controls.Add(TeacherNumberLabel, 0, 11);
-            table.Controls.Add(TeacherNumberBox, 0, 12);
+            table.Controls.Add(TeacherNumbBox, 0, 12);
             table.Controls.Add(FacultyLabel, 0, 13);
             table.Controls.Add(FacultyBox, 0, 14);
             table.Controls.Add(JobLabel, 0, 15);
             table.Controls.Add(JobBox, 0, 16);
-            table.Controls.Add(CreatingStudentButton, 0, 17);
+            table.Controls.Add(CreatingTeacherButton, 0, 17);
             table.Controls.Add(new Panel(), 0, 18);
 
             table.Dock = DockStyle.Fill;
             Controls.Add(table);
+
+            CreatingTeacherButton.Click += CreatingTeacherButton_Click;
+        }
+
+        private void CreatingTeacherButton_Click(object sender, EventArgs e)
+        {
+            Teacher teacher = new Teacher(LastNameBox.Text, NameBox.Text, SecondNameBox.Text,
+              AddressBox.Text, PhoneNumberBox.Text, int.Parse(TeacherNumbBox.Text), FacultyBox.Text, JobBox.Text);
+
+            Form teacherPass = new CreateTeacherPass(teacher);
+            teacherPass.ShowDialog();
+            //throw new NotImplementedException();
         }
     }
 }

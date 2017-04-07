@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace Biblio
 {
-    class Book
+    public class Book
     {
         public string Name;
         public List<string> Author = new List<string>();
-        public string ExpertiseArea;
+        //public string ExpertiseArea;
         public List<BookExemplar> ListOfExemplar = new List<BookExemplar>();
 
-        public Book(string name, string[] author, string expertiseArea)
+        public Book(string name, string[] author)
         {
             Name = name;
 
             foreach (string a in author)
                 Author.Add(a);
 
-            ExpertiseArea = expertiseArea;
+            ///ExpertiseArea = expertiseArea;
         }
 
         public void AddExemplar(int PublicationDate, int InventoryNumber)
@@ -72,6 +72,8 @@ namespace Biblio
                 if (bookEx.Presence == Item.presence.yes) rezult.Add(bookEx);
             }
             return rezult;
+
+           
         }
         
     }

@@ -57,12 +57,10 @@ namespace Biblio
             var table = new TableLayoutPanel();
             table.RowStyles.Clear();
             table.RowStyles.Add(new RowStyle(SizeType.Percent, 50));
-            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
-            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
-            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
-            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
-            table.RowStyles.Add(new RowStyle(SizeType.AutoSize, 30));
-
+            for (int i = 0; i < 5; i++)
+            {
+                table.RowStyles.Add(new RowStyle(SizeType.AutoSize, 30));
+            }
             table.RowStyles.Add(new RowStyle(SizeType.Percent, 50));
             table.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
 
@@ -85,6 +83,7 @@ namespace Biblio
         {
             StudentPass studentPass = new StudentPass(student, int.Parse(IDPassBox.Text), int.Parse(IDLibraryBox.Text));
 
+            //все уходит в абстрактную базу :) 
             
             //throw new NotImplementedException();
         }

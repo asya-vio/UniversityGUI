@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Biblio
 {
-    class ItemLenderBase
+    public class ItemLenderBase
     {
         public string LenderExpertiseArea { get; set; }
 

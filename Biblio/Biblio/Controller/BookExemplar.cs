@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Biblio
 {    
-    class BookExemplar : Item
+    public class BookExemplar : Item
         {
             public int PublicationDate { get; set; }
 

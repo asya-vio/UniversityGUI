@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Biblio
 {
-    class LibraryDepartment : ItemLender
+    public class LibraryDepartment : ItemLender
     {
 
         public LibraryDepartment(ItemLenderBase dataBase) : base (dataBase)

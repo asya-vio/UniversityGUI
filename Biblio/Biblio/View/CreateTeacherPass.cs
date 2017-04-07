@@ -12,10 +12,15 @@ namespace Biblio
 {
     public partial class CreateTeacherPass : Form
     {
-        public CreateTeacherPass()
+        TextBox IDPassBox;
+        TextBox IDLibraryBox;
+        Button CreatePassButton;
+        Teacher teacher;
+
+        public CreateTeacherPass(Teacher teacher)
         {
             InitializeComponent();
-
+            this.teacher = teacher;
 
             var IDPassLabel = new Label
             {
@@ -23,7 +28,7 @@ namespace Biblio
                 Dock = DockStyle.Fill
             };
 
-            var IDPassBox = new TextBox
+            this.IDPassBox = new TextBox
             {
                 Width = 300,
                 Dock = DockStyle.Left,
@@ -35,13 +40,13 @@ namespace Biblio
                 Dock = DockStyle.Fill
             };
 
-            var IDLibraryBox = new TextBox
+            this.IDLibraryBox = new TextBox
             {
                 Width = 250,
                 Dock = DockStyle.Left,
             };
 
-            var CreatePassButton = new Button
+            this.CreatePassButton = new Button
             {
                 Text = "Зарегистрировать билет",
                 BackColor = Color.Chocolate,
@@ -52,10 +57,10 @@ namespace Biblio
             var table = new TableLayoutPanel();
             table.RowStyles.Clear();
             table.RowStyles.Add(new RowStyle(SizeType.Percent, 50));
-            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
-            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
-            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
-            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
+            for (int i = 0; i < 5; i++)
+            {
+                table.RowStyles.Add(new RowStyle(SizeType.AutoSize, 30));
+            }
             table.RowStyles.Add(new RowStyle(SizeType.AutoSize, 30));
 
             table.RowStyles.Add(new RowStyle(SizeType.Percent, 50));
@@ -71,6 +76,16 @@ namespace Biblio
 
             table.Dock = DockStyle.Fill;
             Controls.Add(table);
+
+            CreatePassButton.Click += CreatePassButton_Click;
+        }
+
+        private void CreatePassButton_Click(object sender, EventArgs e)
+        {
+            TeacherPass teacherPass = new TeacherPass(teacher, int.Parse(IDPassBox.Text), int.Parse(IDLibraryBox.Text));
+
+            //все уходит в абстрактную базу :) 
+            //throw new NotImplementedException();
         }
     }
 }

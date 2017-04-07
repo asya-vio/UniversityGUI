@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Biblio
 {
-    class Employee : Man
+    public class Employee : Man
     {
         public int EmployeeNumber { get; set; }
         public string Job { get; set; }

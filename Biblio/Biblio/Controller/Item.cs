@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Biblio
 {
-    abstract class Item
+    public abstract class Item
     {
         public enum presence { no, yes }
    

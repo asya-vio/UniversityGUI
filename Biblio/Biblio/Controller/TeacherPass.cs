@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Biblio
 {
-    class TeacherPass : Pass
+    public class TeacherPass : Pass
     {
         public Teacher TeacherInfo { get; set; }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Biblio
 {
-    class ReadingHall  : ItemLender
+    public class ReadingHall  : ItemLender
     {
 
         public ReadingHall(ItemLenderBase dataBase) : base (dataBase)

@@ -26,6 +26,7 @@ namespace Biblio
         {
             BackColor = Color.AntiqueWhite;
             WindowState = FormWindowState.Maximized;
+            //this.Size = new Size(250, 500);
 
             InitializeComponent();
 
