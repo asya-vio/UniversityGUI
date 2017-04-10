@@ -44,54 +44,54 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\Book.cs" />
-    <Compile Include="Controller\BookCatalog.cs" />
-    <Compile Include="Controller\BookExemplar.cs" />
-    <Compile Include="Controller\BookExpertiseArea.cs" />
-    <Compile Include="Controller\Employee.cs" />
-    <Compile Include="Controller\Item.cs" />
-    <Compile Include="Controller\ItemLending.cs" />
-    <Compile Include="Controller\ItemLender.cs" />
-    <Compile Include="Controller\ItemLenderBase.cs" />
-    <Compile Include="Controller\Library.cs" />
-    <Compile Include="Controller\LibraryDepartment.cs" />
-    <Compile Include="Controller\Man.cs" />
-    <Compile Include="Controller\Pass.cs" />
-    <Compile Include="Controller\ReadingHall.cs" />
-    <Compile Include="Controller\Student.cs" />
-    <Compile Include="Controller\StudentPass.cs" />
-    <Compile Include="Controller\Teacher.cs" />
-    <Compile Include="Controller\TeacherPass.cs" />
-    <Compile Include="View\ShowCatalog.cs">
+    <Compile Include="Classes\Book.cs" />
+    <Compile Include="Classes\BookCatalog.cs" />
+    <Compile Include="Classes\BookExemplar.cs" />
+    <Compile Include="Classes\BookExpertiseArea.cs" />
+    <Compile Include="Classes\Employee.cs" />
+    <Compile Include="Classes\Item.cs" />
+    <Compile Include="Classes\ItemLending.cs" />
+    <Compile Include="Classes\ItemLender.cs" />
+    <Compile Include="Classes\ItemLenderBase.cs" />
+    <Compile Include="Classes\Library.cs" />
+    <Compile Include="Classes\LibraryDepartment.cs" />
+    <Compile Include="Classes\Man.cs" />
+    <Compile Include="Classes\Pass.cs" />
+    <Compile Include="Classes\ReadingHall.cs" />
+    <Compile Include="Classes\Student.cs" />
+    <Compile Include="Classes\StudentPass.cs" />
+    <Compile Include="Classes\Teacher.cs" />
+    <Compile Include="Classes\TeacherPass.cs" />
+    <Compile Include="Forms\ShowCatalog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\ShowCatalog.Designer.cs">
+    <Compile Include="Forms\ShowCatalog.Designer.cs">
       <DependentUpon>ShowCatalog.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\CreateStudent.cs">
+    <Compile Include="Forms\CreateStudent.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\CreateStudent.Designer.cs" />
-    <Compile Include="View\CreateStudentPass.cs">
+    <Compile Include="Forms\CreateStudent.Designer.cs" />
+    <Compile Include="Forms\CreateStudentPass.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\CreateStudentPass.Designer.cs" />
-    <Compile Include="View\CreateTeacher.cs">
+    <Compile Include="Forms\CreateStudentPass.Designer.cs" />
+    <Compile Include="Forms\CreateTeacher.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\CreateTeacher.Designer.cs" />
-    <Compile Include="View\CreateTeacherPass.cs">
+    <Compile Include="Forms\CreateTeacher.Designer.cs" />
+    <Compile Include="Forms\CreateTeacherPass.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\CreateTeacherPass.Designer.cs" />
-    <Compile Include="View\MainForm.cs">
+    <Compile Include="Forms\CreateTeacherPass.Designer.cs" />
+    <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\MainForm.Designer.cs" />
-    <Compile Include="View\SignUpChoice.cs">
+    <Compile Include="Forms\MainForm.Designer.cs" />
+    <Compile Include="Forms\SignUpChoice.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\SignUpChoice.Designer.cs" />
+    <Compile Include="Forms\SignUpChoice.Designer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

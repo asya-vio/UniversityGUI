@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Biblio
 {
@@ -183,6 +184,14 @@ namespace Biblio
                 AddressBox.Text, PhoneNumberBox.Text, int.Parse(IDCardBox.Text), FacultyBox.Text, int.Parse(CourseBox.Text));
 
             Form studentPass = new CreateStudentPass(student);
+
+            using (StreamWriter writer = new StreamWriter(@"L:\ИИТ\ООП\Git\UniversityGUI\Biblio\StudentsBase.csv", true, Encoding.GetEncoding(1251)))
+            {
+                writer.WriteLine(student.LastName + ";" + student.Name + ";" + student.SecondName + ";" + student.Address 
+                    + ";" + student.PhoneNumber + ";" + student.IDStudentCard + ";" + student.Faculty + ";" + student.Course);
+
+            }
+
             studentPass.ShowDialog();
 
             //throw new NotImplementedException();

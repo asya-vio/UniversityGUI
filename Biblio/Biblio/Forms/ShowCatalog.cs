@@ -51,7 +51,7 @@ namespace Biblio
                         BorderStyle = BorderStyle.FixedSingle
                     };
 
-                    label.Click += label_Click(Catalog.ListOfExpertiseArea[i].ListOfBook[j], );
+                    //label.Click += label_Click(Catalog.ListOfExpertiseArea[i].ListOfBook[j], );
 
                     var exemplars = new ComboBox()
                     {
@@ -79,9 +79,9 @@ namespace Biblio
 
 
         }
-        EventArgs clickArg = new EventArgs(j)
-        {
-        };
+        //EventArgs clickArg = new EventArgs(j)
+        //{
+        //};
 
         void label_Click(object sender, EventArgs e)
         {

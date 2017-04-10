@@ -83,8 +83,16 @@ namespace Biblio
         {
             StudentPass studentPass = new StudentPass(student, int.Parse(IDPassBox.Text), int.Parse(IDLibraryBox.Text));
 
+            using (System.IO.StreamWriter writer = new System.IO.StreamWriter(@"L:\ИИТ\ООП\Git\UniversityGUI\Biblio\StudentPassBase.csv", 
+                true, Encoding.GetEncoding(1251)))
+            {
+                writer.WriteLine(student.IDStudentCard + ";" + studentPass.IDPass + ";" + studentPass.IDLibrary);
+            }
+
+            this.Close();
+
             //все уходит в абстрактную базу :) 
-            
+
             //throw new NotImplementedException();
         }
     }
