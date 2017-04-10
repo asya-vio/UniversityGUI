@@ -21,75 +21,68 @@ namespace Biblio
             LendedItem = new List<ItemLending>();
         }
 
-        public void LandItem()
+        public void LandItem(int ID, DateTime LendingDate, int IDLender, int EmployeeNumber, int IDPass, bool IsStudent, int InventoryNumber)
         {
-            //ItemLending itemLending = new ItemLending();
+            ItemLending itemLending = new ItemLending(ID, LendingDate, IDLender, EmployeeNumber, IDPass, IsStudent, InventoryNumber);
 
         }
 
-        public void GetItem(int InventoryNumber, int IDPass)
+        public void GetItem(int InventoryNumber, int IDPass, DateTime ReturnDate)
         {
             for (int i = 0; i < LendedItem.Count; i++)
             {
                 if (LendedItem[i].InventoryNumber == InventoryNumber && LendedItem[i].IDPass == IDPass)
                 {
-                    LendedItem.RemoveAt(i);
+                    LendedItem[i].ReturnDate = ReturnDate;
+                    //LendedItem.RemoveAt(i);
                     break;
                 }
                 else
                 {
-                    Console.WriteLine("Нет данных об этой выдаче");
-                    return;
+                    throw new ArgumentException();
                 }
             }
-            Console.WriteLine("Выдача успешно закрыта");
             return;
         }
 
-        public List<Book> ShowLandedItem(int IDPass, bool Type)
+        public List<BookExemplar> ShowLandedItem(int IDPass)
         {
-            //for (int i = 0; i < LandedItem.Count; i++)
-            //{
-            //    Console.WriteLine("Инвентарный номер - {1}, Номер чит билета - {0}, Дата выдачи - {2}",
-            //        LandedItem[i].IdPass, LandedItem[i].InventoryNumber, LandedItem[i].LandingDate);
-            //}
 
             // ищем все Landing'и с указанным ID и типом
 
-            List<ItemLending> tmp = new List<ItemLending>();
+            List<ItemLending> itemLendingList = new List<ItemLending>();
 
-            foreach (ItemLending lng in LendedItem)
+            foreach (ItemLending lending in LendedItem)
             {
-                if (lng.IDPass == IDPass && lng.IsStudent == Type)
+                if (lending.IDPass == IDPass)
                 {
-                    tmp.Add(lng);
+                    itemLendingList.Add(lending);
                 }
             }
 
             // ищем книги, у которых есть экземляры с инвентарным номером выдачи
 
-            List<Book> rezult = new List<Book>();
+            List<BookExemplar> resultList = new List<BookExemplar>();
 
-            foreach (BookExpertiseArea bea in DataBase.Catalog.ListOfExpertiseArea)
+            foreach (BookExpertiseArea expertiseArea in DataBase.Catalog.ListOfExpertiseArea)
             {
-                foreach (Book bk in bea.ListOfBook)
+                foreach (Book book in expertiseArea.ListOfBook)
                 {
-                    foreach (BookExemplar exm in bk.ListOfExemplar)
+                    foreach (BookExemplar bookExemplar in book.ListOfExemplar)
                     {
 
-                        foreach (ItemLending item in tmp)
+                        foreach (ItemLending item in itemLendingList)
                         {
-                            if (item.InventoryNumber == exm.InventoryNumber)
+                            if (item.InventoryNumber == bookExemplar.InventoryNumber)
                             {
-                                rezult.Add(bk);
+                                resultList.Add(bookExemplar);
                             }
                         }
 
                     }
                 }
             }
-
-            return rezult;
+            return resultList;
 
         }
     }

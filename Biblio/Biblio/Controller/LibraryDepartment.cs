@@ -8,10 +8,13 @@ namespace Biblio
 {
     public class LibraryDepartment : ItemLender
     {
+        int IDLibraryDepartment;
 
-        public LibraryDepartment(ItemLenderBase dataBase) : base (dataBase)
+        public LibraryDepartment(ItemLenderBase dataBase, int IDLibraryDepartment) : base (dataBase)
         {
             this.DataBase = dataBase;
+
+            this.IDLibraryDepartment = IDLibraryDepartment;
 
             LendedItem = new List<ItemLending>();
 

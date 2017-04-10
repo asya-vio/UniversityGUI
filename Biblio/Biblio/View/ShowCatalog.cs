@@ -79,9 +79,9 @@ namespace Biblio
 
 
         }
-        EventArgs clickArg = new EventArgs(int j)
+        EventArgs clickArg = new EventArgs(j)
         {
-            int countNumber;
+        };
 
         void label_Click(object sender, EventArgs e)
         {

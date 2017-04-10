@@ -18,11 +18,6 @@ namespace Biblio
         public Man (string lastName, string name, string secondName, string address,
             string phonenumber)
         {
-            //if (string.IsNullOrEmpty(name)) throw new Exception("Неверное имя человека!");
-
-            //Regex reg = new Regex(@"^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$");
-
-            //if (!reg.IsMatch(PhoneNumber)) throw new Exception("Неверный номер телефона!");
 
             this.LastName = lastName;
             this.Name = name;

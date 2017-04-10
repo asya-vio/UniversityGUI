@@ -17,27 +17,15 @@ namespace Biblio
             ListReadingHall = new List<ReadingHall>();
         }
 
-        public void AddLibraryDept(BookCatalog bookCatalog, ItemLenderBase lenderBase, string ExpertiseArea)
+        public void AddLibraryDept(BookCatalog bookCatalog, ItemLenderBase lenderBase, string ExpertiseArea, int IDLibraryDept)
         {
-            ListLibraryDept.Add(new LibraryDepartment(lenderBase));
-            //BookCatalog bookCatalog = new BookCatalog();
-            //string ExpertiseArea = "Гуманитарная";
-
-            //ItemLenderBase lenderBase = new ItemLenderBase(bookCatalog, ExpertiseArea);
-
-            //LibraryDepartment libraryDept = new LibraryDepartment(lenderBase);
+            ListLibraryDept.Add(new LibraryDepartment(lenderBase, IDLibraryDept));
 
         }
 
-        public void AddReadingHall(BookCatalog bookCatalog, ItemLenderBase lenderBase, string ExpertiseArea)
+        public void AddReadingHall(BookCatalog bookCatalog, ItemLenderBase lenderBase, string ExpertiseArea, int IDReadingHall)
         {
-            ListReadingHall.Add(new ReadingHall(lenderBase));
-            //BookCatalog bookCatalog = new BookCatalog();
-            //string ExpertiseArea = "Научный";
-
-            //ItemLenderBase lenderBase = new ItemLenderBase(bookCatalog, ExpertiseArea);
-
-            //ReadingHall libraryDept = new ReadingHall(lenderBase);
+            ListReadingHall.Add(new ReadingHall(lenderBase, IDReadingHall));
         }
 
         //по идеее, для внесения в базу новых библиотек и читальных залов, тоже нужна своя форма с запросом, но ее нет, потому что некогда

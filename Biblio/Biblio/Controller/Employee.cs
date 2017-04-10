@@ -17,10 +17,6 @@ namespace Biblio
             int EmployeeNumber, string Job)
             : base(lastname, name, secondname, adress, phonenumber)
         {
-            if (EmployeeNumber <= 0) throw new Exception("Неверный ID работника библиотеки");
-
-            if (string.IsNullOrEmpty(Job)) throw new Exception("Не задана должность преподавателя!");
-
             this.EmployeeNumber = EmployeeNumber;
             this.Job = Job;
         }

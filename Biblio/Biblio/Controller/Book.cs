@@ -25,17 +25,11 @@ namespace Biblio
 
         public void AddExemplar(int PublicationDate, int InventoryNumber)
         {
-            //Console.WriteLine("Введите год издания экземпляра");
-            //int date = int.Parse(Console.ReadLine());
-
             ListOfExemplar.Add(new BookExemplar(PublicationDate, InventoryNumber));
         }
 
         public void DeleteExemplar(int InventoryNumber)
         {
-            //Console.WriteLine("Введите инвентарный номер экземпляра");
-            //int inventoryNumb = int.Parse(Console.ReadLine());
-
             for (int i = 0; i < ListOfExemplar.Count; i++)
             {
                 if (ListOfExemplar[i].InventoryNumber == InventoryNumber)
@@ -48,32 +42,17 @@ namespace Biblio
 
         public List<BookExemplar> ShowExemplars()
         {
-            //Console.WriteLine("Всего {0} экземпляров", ListOfExemplar.Count - 1);
-            //for (int i = 0; i < ListOfExemplar.Count; i++)
-           // {
-            //    Console.WriteLine("Инвентарный номер = {0}, год издания {1}",
-            //        ListOfExemplar[i].InventoryNumber, ListOfExemplar[i].PublicationDate);
-            //}
             return ListOfExemplar; 
         }
 
         public List<BookExemplar> ShowFreeExemplars()
         {
-            //foreach (BookExemplar bookEx in ListOfExemplar)
-            //{
-            //    if (bookEx.Presence == Item.presence.yes)
-            //        Console.WriteLine("Инвентарный номер = {0}, год издания {1}",
-            //        bookEx.InventoryNumber, bookEx.PublicationDate);
-            //}
-
-            List<BookExemplar> rezult = new List<BookExemplar>();
+            List<BookExemplar> resultList = new List<BookExemplar>();
             foreach (BookExemplar bookEx in ListOfExemplar)
             {
-                if (bookEx.Presence == Item.presence.yes) rezult.Add(bookEx);
+                if (bookEx.Presence == Item.presence.yes) resultList.Add(bookEx);
             }
-            return rezult;
-
-           
+            return resultList;          
         }
         
     }

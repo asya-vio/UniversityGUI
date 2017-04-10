@@ -16,7 +16,6 @@ namespace Biblio
         public TeacherPass (Teacher TeacherInfo, int IDPass, int IDLibrary)
             : base (IDPass, IDLibrary)
         {
-            if (TeacherInfo == null) throw new Exception("Не указан преподаватель для абонемента");
 
             this.TeacherInfo = TeacherInfo;
             TeacherInfo.Pass = this;

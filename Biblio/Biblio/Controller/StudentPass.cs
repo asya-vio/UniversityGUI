@@ -16,7 +16,6 @@ namespace Biblio
         public StudentPass(Student StudentInfo, int IDPass, int IDLibrary)
             : base(IDPass, IDLibrary)
         {
-            if (StudentInfo == null) throw new Exception("Не указан студент для абонемента");
 
             this.StudentInfo = StudentInfo;
             StudentInfo.Pass = this;

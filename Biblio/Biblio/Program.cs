@@ -8,10 +8,6 @@ namespace Biblio
 {
    public static class Program
     {
-
-        /// <summary>
-        /// Главная точка входа для приложения.
-        /// </summary>
         [STAThread]
         public static void Main()
         {

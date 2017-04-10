@@ -12,11 +12,11 @@ namespace Biblio
 
         public BookCatalog Catalog { get; set; }
 
-        public List<StudentPass> Students { get; set; }
+        public List<StudentPass> Students = new List<StudentPass>();
 
-        public List<TeacherPass> Teachers { get; set; }
+        public List<TeacherPass> Teachers = new List<TeacherPass>();
 
-        public List<Employee> Employees { get; set; }
+        public List<Employee> Employees = new List<Employee>();
 
         public ItemLenderBase(BookCatalog Catalog, string ExpArea)
         {
@@ -24,11 +24,6 @@ namespace Biblio
 
             this.Catalog = Catalog;
 
-            Students = new List<StudentPass>();
-
-            Teachers = new List<TeacherPass>();
-
-            Employees = new List<Employee>();
         }
 
         public void AddStudentPass (StudentPass pass)
@@ -65,18 +60,18 @@ namespace Biblio
             }
         }
 
-        public void AddEmployee(Employee emp)
+        public void AddEmployee(Employee employee)
         {
-            Employees.Add(emp);
+            Employees.Add(employee);
         }
 
         public void DeleteEmployee(int EmployeeNumber)
         {
-            foreach (Employee emp in Employees)
+            foreach (Employee employee in Employees)
             {
-                if (emp.EmployeeNumber == EmployeeNumber)
+                if (employee.EmployeeNumber == EmployeeNumber)
                 {
-                    Employees.Remove(emp);
+                    Employees.Remove(employee);
                     return;
                 }
             }

@@ -14,7 +14,7 @@ namespace Biblio
 
         public DateTime ReturnDate { get; set; }
 
-        public int IDLibrary { get; set; }
+        public int IDLender { get; set; }
 
         public int EmployeeNumber { get; set; }
 
@@ -25,32 +25,24 @@ namespace Biblio
         public int InventoryNumber { get; set; }
 
         public ItemLending
-            (int ID, DateTime LendDate, DateTime RetDate, int IDLib, int EmpNum, 
+            (int IDLending, DateTime LendingDate, int IDLender, int EmployeeNumber, 
             int IDPass, bool IsStud, int InventoryNumber)
         {
-            IDLending = ID;
+            this.IDLending = IDLending;
 
-            LendingDate = LendDate;
+            this.LendingDate = LendingDate;
 
-            ReturnDate = LendDate;
+            //ReturnDate = LendDate;
 
-            IDLibrary = IDLib;
+            this.IDLender = IDLender;
 
-            EmployeeNumber = EmpNum;
+            this.EmployeeNumber = EmployeeNumber;
 
             this.IDPass = IDPass;
 
             this.IsStudent = IsStud;
 
             this.InventoryNumber = InventoryNumber;
-        }
-
-        public void ExtendDate (int days)
-        {
-            if (days > 0)
-            {
-                ReturnDate.AddDays(days);
-            }
         }
 
     }
