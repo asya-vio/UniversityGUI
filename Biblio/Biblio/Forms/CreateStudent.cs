@@ -180,19 +180,35 @@ namespace Biblio
             //string faculty = FacultyBox.Text;
             //int course = int.Parse(CourseBox.Text);
 
-            Student student = new Student(LastNameBox.Text, NameBox.Text, SecondNameBox.Text, 
-                AddressBox.Text, PhoneNumberBox.Text, int.Parse(IDCardBox.Text), FacultyBox.Text, int.Parse(CourseBox.Text));
-
-            Form studentPass = new CreateStudentPass(student);
-
-            using (StreamWriter writer = new StreamWriter(@"L:\ИИТ\ООП\Git\UniversityGUI\Biblio\StudentsBase.csv", true, Encoding.GetEncoding(1251)))
+            if (string.IsNullOrWhiteSpace(LastNameBox.Text) || string.IsNullOrWhiteSpace(NameBox.Text) ||
+               string.IsNullOrWhiteSpace(SecondNameBox.Text) || string.IsNullOrWhiteSpace(AddressBox.Text) ||
+               string.IsNullOrWhiteSpace(IDCardBox.Text) || string.IsNullOrWhiteSpace(CourseBox.Text))
             {
-                writer.WriteLine(student.LastName + ";" + student.Name + ";" + student.SecondName + ";" + student.Address 
-                    + ";" + student.PhoneNumber + ";" + student.IDStudentCard + ";" + student.Faculty + ";" + student.Course);
+                MessageBox.Show("Не все поля заполнены!");
+            }
+            else
+            {
+                Student student = new Student(LastNameBox.Text, NameBox.Text, SecondNameBox.Text, 
+                      AddressBox.Text, PhoneNumberBox.Text, int.Parse(IDCardBox.Text), FacultyBox.Text, int.Parse(CourseBox.Text));
 
+                    Form studentPass = new CreateStudentPass(student);
+
+                    using (StreamWriter writer = new StreamWriter(@"L:\ИИТ\ООП\Git\UniversityGUI\Biblio\StudentsBase.csv", 
+                        true, Encoding.GetEncoding(1251)))
+                    {
+                        writer.WriteLine(student.LastName + ";" + student.Name + ";" + student.SecondName + ";" + student.Address 
+                            + ";" + student.PhoneNumber + ";" + student.IDStudentCard + ";" + student.Faculty + ";" + student.Course);
+                    }
+
+                    studentPass.ShowDialog();
+            
             }
 
-            studentPass.ShowDialog();
+
+
+
+
+
 
             //throw new NotImplementedException();
         }
