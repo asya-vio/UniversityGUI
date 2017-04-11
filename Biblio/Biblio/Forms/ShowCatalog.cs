@@ -15,27 +15,41 @@ namespace Biblio
     {
         ListBox listBox;
         TreeView treeView;
+        Button addBookButton;
 
         public ShowCatalog()
         {
 
             InitializeComponent();
 
-            this.listBox = new ListBox()
+            this.listBox = new ListBox
+            {
+                Width = 600,
+                Height = 1000
+            };
+
+            this.treeView = new TreeView
             {
                 Width = 800,
                 Height = 1000
             };
 
-            this.treeView = new TreeView()
-            {
-                Width = 800,
-                Height = 1000
-            };
+
 
             BackColor = Color.AntiqueWhite;
             WindowState = FormWindowState.Maximized;
             Font = new Font("Tahoma", 12, FontStyle.Regular);
+
+            this.addBookButton = new Button()
+            {
+                Location = new Point(900,100),
+                Width = 200,
+                Height = 150,
+                Text = "Добавить книгу",
+                BackColor = Color.Azure
+            };
+            Controls.Add(addBookButton);
+
 
             //int countLines = 0;
             //for (int i = 0; i < Catalog.ListOfExpertiseArea.Count(); i++)
@@ -132,9 +146,46 @@ namespace Biblio
             //Controls.Add(listBox);
             Controls.Add(treeView);
 
-
+            addBookButton.Click += AddBookButton_Click;
 
         }
+
+        private void AddBookButton_Click(object sender, EventArgs e)
+        {
+            Form createBook = new CreateBook();
+
+            createBook.ShowDialog();
+
+
+            string connectionString =
+                       "provider=Microsoft.Jet.OLEDB.4.0;" + "data source=L:\\ИИТ\\ООП\\Git\\UniversityGUI\\Biblio\\Biblio\\BD.mdb";
+            OleDbConnection myOleDbConnection = new OleDbConnection(connectionString);
+            OleDbCommand myOleDbCommand = myOleDbConnection.CreateCommand();
+
+            myOleDbCommand.CommandText = "SELECT top 1 [Name], [Authors] FROM Book order by [Код] desc";
+
+            myOleDbConnection.Open();
+
+
+            OleDbDataReader dr = myOleDbCommand.ExecuteReader();
+
+            if (dr.HasRows)
+            {
+
+                while (dr.Read())
+                {
+
+                    //listBox.Items.Add(dr["Name"] + " " + dr["Authors"]);
+
+                    treeView.Nodes.Add(dr["Name"].ToString() + " " + dr["Authors"].ToString());
+                }
+
+            }
+            Controls.Add(treeView);
+
+            //throw new NotImplementedException();
+        }
+
         //EventArgs clickArg = new EventArgs(j)
         //{
         //};

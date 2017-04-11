@@ -67,6 +67,12 @@
     <Compile Include="Classes\StudentPass.cs" />
     <Compile Include="Classes\Teacher.cs" />
     <Compile Include="Classes\TeacherPass.cs" />
+    <Compile Include="Forms\CreateBook.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CreateBook.Designer.cs">
+      <DependentUpon>CreateBook.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ShowCatalog.cs">
       <SubType>Form</SubType>
     </Compile>
