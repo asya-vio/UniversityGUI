@@ -50,69 +50,6 @@ namespace Biblio
             };
             Controls.Add(addBookButton);
 
-
-            //int countLines = 0;
-            //for (int i = 0; i < Catalog.ListOfExpertiseArea.Count(); i++)
-            //    countLines += Catalog.ListOfExpertiseArea[i].ListOfBook.Count();
-
-            //var table = new TableLayoutPanel();
-
-
-            //table.RowStyles.Clear();
-            //table.RowStyles.Add(new RowStyle(SizeType.Percent, 95));
-            //for (int i = 0; i < countLines; i++)
-            //{
-            //    table.RowStyles.Add(new RowStyle(SizeType.AutoSize, 30));
-            //}
-            //table.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
-            //table.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
-
-
-            //table.Controls.Add(new Panel(), 0, 0);
-            //for (int i = 0; i < Catalog.ListOfExpertiseArea.Count(); i++)
-            //{ 
-            //    for (int j = 0; j < Catalog.ListOfExpertiseArea[i].ListOfBook.Count(); j++)
-            //    {
-            //        var label = new Label
-            //        {
-            //            Text = Catalog.ListOfExpertiseArea[i].ListOfBook[j].Name,
-            //            Width = 200,
-            //            Dock = DockStyle.Left,
-            //            BorderStyle = BorderStyle.FixedSingle
-            //        };
-
-            //        //label.Click += label_Click(Catalog.ListOfExpertiseArea[i].ListOfBook[j], );
-
-            //        var exemplars = new ComboBox()
-            //        {
-            //            Width = 1500,
-            //            Dock = DockStyle.Right         
-            //        };
-            //        List<BookExemplar> exemplars1 = Catalog.ListOfExpertiseArea[i].ListOfBook[j].ShowExemplars();
-
-            //        for (int k = 0; k < exemplars1.Count(); k++)
-            //        {
-            //            string info = "Инвентарный номер: "+ exemplars1[k].InventoryNumber +"    | " +
-            //                " Наличие: " + exemplars1[k].Presence.ToString() + "    | "  + " Дата публикации: " +  exemplars1[k].PublicationDate;
-            //            exemplars.Items.Add(info);
-            //        }
-
-            //        table.Controls.Add(label, 0, i+1);
-            //        table.Controls.Add(exemplars, 1, i+1);
-
-
-
-
-
-
-            //}
-            //}
-            //table.Controls.Add(new Panel(), 0, countLines + 1);
-
-            //table.Dock = DockStyle.Fill;
-            //Controls.Add(table);
-
-
             string connectionString =
                         "provider=Microsoft.Jet.OLEDB.4.0;" + "data source=L:\\ИИТ\\ООП\\Git\\UniversityGUI\\Biblio\\Biblio\\BD.mdb";
             OleDbConnection myOleDbConnection = new OleDbConnection(connectionString);
@@ -125,25 +62,48 @@ namespace Biblio
 
             OleDbDataReader dr = myOleDbCommand.ExecuteReader();
 
+            int i = 0;
             if (dr.HasRows)
             {
 
                 while (dr.Read())
                 {
 
-
-                    //listBox.Items.Add(dr["Name"] + " " + dr["Authors"]);
-
-
                     treeView.Nodes.Add(dr["Name"].ToString() + " " + dr["Authors"].ToString());
+
+                    string connection1String =
+                    "provider=Microsoft.Jet.OLEDB.4.0;" + "data source=L:\\ИИТ\\ООП\\Git\\UniversityGUI\\Biblio\\Biblio\\BD.mdb";
+
+                    OleDbConnection myOleDbConnection1 = new OleDbConnection(connection1String);
+                    OleDbCommand myOleDbCommand1 = myOleDbConnection1.CreateCommand();
+
+                    myOleDbCommand1.CommandText = "SELECT [InventoryNumber], [PublicationDate], [Presence] FROM BookExemplar";
+
+                    myOleDbConnection1.Open();
+
+                    OleDbDataReader ex = myOleDbCommand1.ExecuteReader();
+
+                    if (ex.HasRows)
+                    {
+                        while (ex.Read())
+                        {
+                            treeView.Nodes[i].Nodes.Add("Инвентарный номер: " + ex["InventoryNumber"].ToString() + "  "
+                                + "Год публикации: " + ex["PublicationDate"].ToString() + " " + "Наличие: " +ex ["Presence"].ToString());
+                        }
+
+                    }
+                    ex.Close();
+                    myOleDbConnection1.Close();
+                   
+
+                    i++;
                 }
 
             }
 
-            myOleDbConnection.Close();
             dr.Close();
+            myOleDbConnection.Close();
 
-            //Controls.Add(listBox);
             Controls.Add(treeView);
 
             addBookButton.Click += AddBookButton_Click;
@@ -166,7 +126,6 @@ namespace Biblio
 
             myOleDbConnection.Open();
 
-
             OleDbDataReader dr = myOleDbCommand.ExecuteReader();
 
             if (dr.HasRows)
@@ -175,25 +134,15 @@ namespace Biblio
                 while (dr.Read())
                 {
 
-                    //listBox.Items.Add(dr["Name"] + " " + dr["Authors"]);
-
                     treeView.Nodes.Add(dr["Name"].ToString() + " " + dr["Authors"].ToString());
+                    
                 }
 
             }
             Controls.Add(treeView);
 
-            //throw new NotImplementedException();
         }
 
-        //EventArgs clickArg = new EventArgs(j)
-        //{
-        //};
 
-        void label_Click(object sender, EventArgs e)
-        {
-
-            //throw new NotImplementedException();
-        }
     }
 }
