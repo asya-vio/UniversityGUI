@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.OleDb;
 
 namespace Biblio
 {
@@ -25,8 +26,8 @@ namespace Biblio
         public CreateTeacher()
         {
             BackColor = Color.AntiqueWhite;
-            //WindowState = FormWindowState.Maximized;
-            this.Size = new Size(250, 500);
+            WindowState = FormWindowState.Maximized;
+            //this.Size = new Size(250, 500);
 
             InitializeComponent();
 
@@ -169,12 +170,36 @@ namespace Biblio
 
         private void CreatingTeacherButton_Click(object sender, EventArgs e)
         {
-            Teacher teacher = new Teacher(LastNameBox.Text, NameBox.Text, SecondNameBox.Text,
-              AddressBox.Text, PhoneNumberBox.Text, int.Parse(TeacherNumbBox.Text), FacultyBox.Text, JobBox.Text);
 
-            Form teacherPass = new CreateTeacherPass(teacher);
-            teacherPass.ShowDialog();
-            //throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(LastNameBox.Text) || string.IsNullOrWhiteSpace(NameBox.Text) ||
+            string.IsNullOrWhiteSpace(SecondNameBox.Text) || string.IsNullOrWhiteSpace(AddressBox.Text) ||
+            string.IsNullOrWhiteSpace(TeacherNumbBox.Text) || string.IsNullOrWhiteSpace(JobBox.Text))
+            {
+                MessageBox.Show("Не все поля заполнены!");
+            }
+            else
+            {
+                string connectionString = "provider=Microsoft.Jet.OLEDB.4.0;" + "data source=F:\\ИИТ\\ООП\\Git\\UniversityGUI\\Biblio\\Biblio\\BD.mdb";
+                OleDbConnection myOleDbConnection = new OleDbConnection(connectionString);
+
+                OleDbCommand myOleDbCommand = myOleDbConnection.CreateCommand();
+
+                myOleDbCommand.CommandText = "INSERT INTO Teacher ([TeacherNumber], [LastName], [Name], [SecondName], [Address], [PhoneNumber], [Faculty], [Job]) values ('"
+                    + TeacherNumbBox.Text + "' , '" + LastNameBox.Text + "','" + NameBox.Text + "','" + SecondNameBox.Text
+                    + "','" + AddressBox.Text + "','" + PhoneNumberBox.Text + "','" + FacultyBox.Text + "','" + JobBox.Text + "')";
+
+                myOleDbConnection.Open();
+
+                myOleDbCommand.ExecuteNonQuery();
+
+                Teacher teacher = new Teacher(LastNameBox.Text, NameBox.Text, SecondNameBox.Text,
+                      AddressBox.Text, PhoneNumberBox.Text, int.Parse(TeacherNumbBox.Text), FacultyBox.Text, JobBox.Text);
+
+                Form teacherPass = new CreateTeacherPass(teacher);
+                teacherPass.ShowDialog();
+
+                //throw new NotImplementedException();
+            }
         }
     }
 }

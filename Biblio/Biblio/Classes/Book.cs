@@ -10,7 +10,6 @@ namespace Biblio
     {
         public string Name;
         public List<string> Author = new List<string>();
-        //public string ExpertiseArea;
         public List<BookExemplar> ListOfExemplar = new List<BookExemplar>();
 
         public Book(string name, string[] author)
@@ -20,7 +19,6 @@ namespace Biblio
             foreach (string a in author)
                 Author.Add(a);
 
-            ///ExpertiseArea = expertiseArea;
         }
 
         public void AddExemplar(int PublicationDate, int InventoryNumber)

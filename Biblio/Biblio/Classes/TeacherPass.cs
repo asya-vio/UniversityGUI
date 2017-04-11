@@ -13,8 +13,8 @@ namespace Biblio
         public const int TimeQuota = 600;
         public const int AmountQuota = 20;
 
-        public TeacherPass (Teacher TeacherInfo, int IDPass, int IDLibrary)
-            : base (IDPass, IDLibrary)
+        public TeacherPass (Teacher TeacherInfo, int IDPass, int IDLender)
+            : base (IDPass, IDLender)
         {
 
             this.TeacherInfo = TeacherInfo;

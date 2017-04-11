@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Data.OleDb;
 
 namespace Biblio
 {
@@ -170,16 +171,6 @@ namespace Biblio
 
         void CreatingStudentButton_OnClick(object sender, EventArgs e)
         {
-            //string lastName = LastNameBox.Text;
-            //string name = NameBox.Text;
-            //string secondName = SecondNameBox.Text;
-
-            //string address = AddressBox.Text;
-            //string phoneNumb = PhoneNumberBox.Text;
-            //int IDcard = int.Parse(IDCardBox.Text);
-            //string faculty = FacultyBox.Text;
-            //int course = int.Parse(CourseBox.Text);
-
             if (string.IsNullOrWhiteSpace(LastNameBox.Text) || string.IsNullOrWhiteSpace(NameBox.Text) ||
                string.IsNullOrWhiteSpace(SecondNameBox.Text) || string.IsNullOrWhiteSpace(AddressBox.Text) ||
                string.IsNullOrWhiteSpace(IDCardBox.Text) || string.IsNullOrWhiteSpace(CourseBox.Text))
@@ -188,29 +179,48 @@ namespace Biblio
             }
             else
             {
-                Student student = new Student(LastNameBox.Text, NameBox.Text, SecondNameBox.Text, 
+                string connectionString ="provider=Microsoft.Jet.OLEDB.4.0;" + "data source=F:\\ИИТ\\ООП\\Git\\UniversityGUI\\Biblio\\Biblio\\BD.mdb";
+                OleDbConnection myOleDbConnection = new OleDbConnection(connectionString);
+
+                OleDbCommand myOleDbCommand = myOleDbConnection.CreateCommand();
+
+                myOleDbCommand.CommandText = "INSERT INTO Student ([IDStudentCard], [LastName], [Name], [SecondName], [Address], [PhoneNumber], [Faculty], [Course]) values ('" 
+                    + IDCardBox.Text + "' , '" + LastNameBox.Text + "','" + NameBox.Text + "','" + SecondNameBox.Text
+                    + "','" + AddressBox.Text + "','" + PhoneNumberBox.Text + "','" + FacultyBox.Text + "','" + int.Parse(CourseBox.Text) + "')";
+
+                myOleDbConnection.Open();
+
+                myOleDbCommand.ExecuteNonQuery();
+
+                Student student = new Student(LastNameBox.Text, NameBox.Text, SecondNameBox.Text,
                       AddressBox.Text, PhoneNumberBox.Text, int.Parse(IDCardBox.Text), FacultyBox.Text, int.Parse(CourseBox.Text));
 
-                    Form studentPass = new CreateStudentPass(student);
+                Form studentPass = new CreateStudentPass(student);
+                studentPass.ShowDialog();
 
-                    using (StreamWriter writer = new StreamWriter(@"L:\ИИТ\ООП\Git\UniversityGUI\Biblio\StudentsBase.csv", 
-                        true, Encoding.GetEncoding(1251)))
-                    {
-                        writer.WriteLine(student.LastName + ";" + student.Name + ";" + student.SecondName + ";" + student.Address 
-                            + ";" + student.PhoneNumber + ";" + student.IDStudentCard + ";" + student.Faculty + ";" + student.Course);
-                    }
 
-                    studentPass.ShowDialog();
-            
             }
 
 
+            //else
+            //{
+            //    Student student = new Student(LastNameBox.Text, NameBox.Text, SecondNameBox.Text, 
+            //          AddressBox.Text, PhoneNumberBox.Text, int.Parse(IDCardBox.Text), FacultyBox.Text, int.Parse(CourseBox.Text));
+
+            //        Form studentPass = new CreateStudentPass(student);
+
+            //        using (StreamWriter writer = new StreamWriter(@"E:\ИИТ\ООП\Git\UniversityGUI\Biblio\StudentsBase.csv", 
+            //            true, Encoding.GetEncoding(1251)))
+            //        {
+            //            writer.WriteLine(student.LastName + ";" + student.Name + ";" + student.SecondName + ";" + student.Address 
+            //                + ";" + student.PhoneNumber + ";" + student.IDStudentCard + ";" + student.Faculty + ";" + student.Course);
+            //        }
+
+            //        studentPass.ShowDialog();
+            
+            //}
 
 
-
-
-
-            //throw new NotImplementedException();
         }
 
 

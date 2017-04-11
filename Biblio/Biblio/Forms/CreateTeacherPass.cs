@@ -7,13 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.OleDb;
 
 namespace Biblio
 {
     public partial class CreateTeacherPass : Form
     {
         TextBox IDPassBox;
-        TextBox IDLibraryBox;
+        TextBox IDLenderBox;
         Button CreatePassButton;
         Teacher teacher;
 
@@ -40,7 +41,7 @@ namespace Biblio
                 Dock = DockStyle.Fill
             };
 
-            this.IDLibraryBox = new TextBox
+            this.IDLenderBox = new TextBox
             {
                 Width = 250,
                 Dock = DockStyle.Left,
@@ -70,7 +71,7 @@ namespace Biblio
             table.Controls.Add(IDPassLabel, 0, 1);
             table.Controls.Add(IDPassBox, 0, 2);
             table.Controls.Add(IDLibraryLabel, 0, 3);
-            table.Controls.Add(IDLibraryBox, 0, 4);
+            table.Controls.Add(IDLenderBox, 0, 4);
             table.Controls.Add(CreatePassButton, 0, 5);
             table.Controls.Add(new Panel(), 0, 6);
 
@@ -82,9 +83,28 @@ namespace Biblio
 
         private void CreatePassButton_Click(object sender, EventArgs e)
         {
-            TeacherPass teacherPass = new TeacherPass(teacher, int.Parse(IDPassBox.Text), int.Parse(IDLibraryBox.Text));
+            if (string.IsNullOrWhiteSpace(IDPassBox.Text) || string.IsNullOrWhiteSpace(IDLenderBox.Text))
+            {
+                MessageBox.Show("Не все поля заполнены!");
+            }
 
-            //все уходит в абстрактную базу :) 
+            else
+            {
+                TeacherPass teacherPass = new TeacherPass(teacher, int.Parse(IDPassBox.Text), int.Parse(IDLenderBox.Text));
+
+                string connectionString = "provider=Microsoft.Jet.OLEDB.4.0;" + "data source=F:\\ИИТ\\ООП\\Git\\UniversityGUI\\Biblio\\Biblio\\BD.mdb";
+                OleDbConnection myOleDbConnection = new OleDbConnection(connectionString);
+
+                OleDbCommand myOleDbCommand = myOleDbConnection.CreateCommand();
+
+                myOleDbCommand.CommandText = "INSERT INTO TeacherPass ([IDPass], [IDLender], [IDTeacher]) values ('" + IDPassBox.Text + "' , '" + IDLenderBox.Text + "','" + teacher.TeacherNumber + "')";
+                myOleDbConnection.Open();
+
+                myOleDbCommand.ExecuteNonQuery();
+
+                this.Close();
+
+            }
             //throw new NotImplementedException();
         }
     }

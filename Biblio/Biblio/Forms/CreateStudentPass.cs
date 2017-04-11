@@ -7,13 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.OleDb;
 
 namespace Biblio
 {
     public partial class CreateStudentPass : Form
     {
         TextBox IDPassBox;
-        TextBox IDLibraryBox;
+        TextBox IDLenderBox;
         Button CreatePassButton;
         Student student;
 
@@ -40,7 +41,7 @@ namespace Biblio
                 Dock = DockStyle.Fill
             };
 
-            this.IDLibraryBox = new TextBox
+            this.IDLenderBox = new TextBox
             {
                 Width = 250,
                 Dock = DockStyle.Left,
@@ -68,7 +69,7 @@ namespace Biblio
             table.Controls.Add(IDPassLabel, 0, 1);
             table.Controls.Add(IDPassBox, 0, 2);
             table.Controls.Add(IDLibraryLabel, 0, 3);
-            table.Controls.Add(IDLibraryBox, 0, 4);
+            table.Controls.Add(IDLenderBox, 0, 4);
             table.Controls.Add(CreatePassButton, 0, 5);
             table.Controls.Add(new Panel(), 0, 6);
 
@@ -82,20 +83,40 @@ namespace Biblio
         void CreatePassButton_Click(object sender, EventArgs e)
         {
 
-            if(string.IsNullOrWhiteSpace(IDPassBox.Text) || string.IsNullOrWhiteSpace(IDLibraryBox.Text))
+            if(string.IsNullOrWhiteSpace(IDPassBox.Text) || string.IsNullOrWhiteSpace(IDLenderBox.Text))
             {
                  MessageBox.Show("Не все поля заполнены!");
             }
 
-            StudentPass studentPass = new StudentPass(student, int.Parse(IDPassBox.Text), int.Parse(IDLibraryBox.Text));
-
-            using (System.IO.StreamWriter writer = new System.IO.StreamWriter(@"L:\ИИТ\ООП\Git\UniversityGUI\Biblio\StudentPassBase.csv", 
-                true, Encoding.GetEncoding(1251)))
+            else
             {
-                writer.WriteLine(student.IDStudentCard + ";" + studentPass.IDPass + ";" + studentPass.IDLibrary);
-            }
+                StudentPass studentPass = new StudentPass(student, int.Parse(IDPassBox.Text), int.Parse(IDLenderBox.Text));
 
-            this.Close();
+                string connectionString = "provider=Microsoft.Jet.OLEDB.4.0;" + "data source=F:\\ИИТ\\ООП\\Git\\UniversityGUI\\Biblio\\Biblio\\BD.mdb";
+                OleDbConnection myOleDbConnection = new OleDbConnection(connectionString);
+
+                OleDbCommand myOleDbCommand = myOleDbConnection.CreateCommand();
+
+
+
+                myOleDbCommand.CommandText = "INSERT INTO StudentPass ([IDPass], [IDLender], [IDStudent]) values ('" + IDPassBox.Text + "' , '" + IDLenderBox.Text + "','" + student.IDStudentCard + "')";
+                myOleDbConnection.Open();
+
+                myOleDbCommand.ExecuteNonQuery();
+
+                this.Close();
+
+            }
+            
+            
+
+            //using (System.IO.StreamWriter writer = new System.IO.StreamWriter(@"F:\ИИТ\ООП\Git\UniversityGUI\Biblio\StudentPassBase.csv", 
+            //    true, Encoding.GetEncoding(1251)))
+            //{
+            //    writer.WriteLine(student.IDStudentCard + ";" + studentPass.IDPass + ";" + studentPass.IDLibrary);
+            //}
+
+            //this.Close();
 
             //throw new NotImplementedException();
         }
