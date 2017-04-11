@@ -92,7 +92,7 @@ namespace Biblio
             {
                 TeacherPass teacherPass = new TeacherPass(teacher, int.Parse(IDPassBox.Text), int.Parse(IDLenderBox.Text));
 
-                string connectionString = "provider=Microsoft.Jet.OLEDB.4.0;" + "data source=F:\\ИИТ\\ООП\\Git\\UniversityGUI\\Biblio\\Biblio\\BD.mdb";
+                string connectionString = "provider=Microsoft.Jet.OLEDB.4.0;" + "data source=L:\\ИИТ\\ООП\\Git\\UniversityGUI\\Biblio\\Biblio\\BD.mdb";
                 OleDbConnection myOleDbConnection = new OleDbConnection(connectionString);
 
                 OleDbCommand myOleDbCommand = myOleDbConnection.CreateCommand();

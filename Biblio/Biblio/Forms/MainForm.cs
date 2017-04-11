@@ -109,31 +109,41 @@ namespace Biblio
             //throw new NotImplementedException();
         }
 
+        //private void CatalogButton_Click(object sender, EventArgs e)
+        //{
+        //    BookCatalog catalog = new BookCatalog();
+        //    catalog.AddExpertiseArea("Наука");
+        //    catalog.AddExpertiseArea("Не наука");
+        //    string[] auth = { "Акапян", "Моисеенко" };
+
+        //    Book book1 = new Book("Книжечка", auth);
+        //    catalog.ListOfExpertiseArea[0].AddBook(book1);
+
+        //    Book book2 = new Book("Кнчка", auth);
+        //    catalog.ListOfExpertiseArea[1].AddBook(book2);
+
+        //    book1.AddExemplar(1987, 123);
+        //    book1.AddExemplar(1980, 124);
+
+        //    book2.AddExemplar(1890, 456);
+
+        //    Form ShowCatalog = new ShowCatalog(catalog);
+        //    this.Hide();
+        //    ShowCatalog.ShowDialog();
+
+        //    this.Visible = true;
+        //    //throw new NotImplementedException();
+        //}
+
         private void CatalogButton_Click(object sender, EventArgs e)
         {
-            BookCatalog catalog = new BookCatalog();
-            catalog.AddExpertiseArea("Наука");
-            catalog.AddExpertiseArea("Не наука");
-            string[] auth = { "Акапян", "Моисеенко" };
-
-            Book book1 = new Book("Книжечка", auth);
-            catalog.ListOfExpertiseArea[0].AddBook(book1);
-
-            Book book2 = new Book("Кнчка", auth);
-            catalog.ListOfExpertiseArea[1].AddBook(book2);
-
-            book1.AddExemplar(1987, 123);
-            book1.AddExemplar(1980, 124);
-
-            book2.AddExemplar(1890, 456);
-
-            Form ShowCatalog = new ShowCatalog(catalog);
+            Form ShowCatalog = new ShowCatalog();
             this.Hide();
             ShowCatalog.ShowDialog();
 
             this.Visible = true;
-            //throw new NotImplementedException();
         }
+
 
         private void SignUpButton_Click(object sender, EventArgs e)
         {

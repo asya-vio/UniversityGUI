@@ -179,7 +179,7 @@ namespace Biblio
             }
             else
             {
-                string connectionString = "provider=Microsoft.Jet.OLEDB.4.0;" + "data source=F:\\ИИТ\\ООП\\Git\\UniversityGUI\\Biblio\\Biblio\\BD.mdb";
+                string connectionString = "provider=Microsoft.Jet.OLEDB.4.0;" + "data source=L:\\ИИТ\\ООП\\Git\\UniversityGUI\\Biblio\\Biblio\\BD.mdb";
                 OleDbConnection myOleDbConnection = new OleDbConnection(connectionString);
 
                 OleDbCommand myOleDbCommand = myOleDbConnection.CreateCommand();
