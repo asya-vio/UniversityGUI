@@ -93,10 +93,10 @@ namespace Biblio
             }
             else
             {
-                string connectionString = "provider=Microsoft.Jet.OLEDB.4.0;" + "data source=L:\\ИИТ\\ООП\\Git\\UniversityGUI\\Biblio\\Biblio\\BD.mdb";
-                OleDbConnection myOleDbConnection = new OleDbConnection(connectionString);
-
+                var con = System.Configuration.ConfigurationManager.ConnectionStrings["DBConnect"];
+                OleDbConnection myOleDbConnection = new OleDbConnection(con.ConnectionString);
                 OleDbCommand myOleDbCommand = myOleDbConnection.CreateCommand();
+
 
                 myOleDbCommand.CommandText = "INSERT INTO Book ([Name], [Authors]) values ('"
                     + nameBox.Text + "' , '" + authorsBox.Text + "')";
@@ -106,11 +106,7 @@ namespace Biblio
                 myOleDbCommand.ExecuteNonQuery();
                 myOleDbConnection.Close();
 
-                //treeView.Nodes.Add(nameBox.Text + " " + authorsBox.Text);
-
                 this.Close();
-
-                //throw new NotImplementedException();
             }
         }
     }

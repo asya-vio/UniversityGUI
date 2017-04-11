@@ -92,9 +92,8 @@ namespace Biblio
             {
                 StudentPass studentPass = new StudentPass(student, int.Parse(IDPassBox.Text), int.Parse(IDLenderBox.Text));
 
-                string connectionString = "provider=Microsoft.Jet.OLEDB.4.0;" + "data source=L:\\ИИТ\\ООП\\Git\\UniversityGUI\\Biblio\\Biblio\\BD.mdb";
-                OleDbConnection myOleDbConnection = new OleDbConnection(connectionString);
-
+                var con = System.Configuration.ConfigurationManager.ConnectionStrings["DBConnect"];
+                OleDbConnection myOleDbConnection = new OleDbConnection(con.ConnectionString);
                 OleDbCommand myOleDbCommand = myOleDbConnection.CreateCommand();
 
 
@@ -108,17 +107,6 @@ namespace Biblio
 
             }
             
-            
-
-            //using (System.IO.StreamWriter writer = new System.IO.StreamWriter(@"F:\ИИТ\ООП\Git\UniversityGUI\Biblio\StudentPassBase.csv", 
-            //    true, Encoding.GetEncoding(1251)))
-            //{
-            //    writer.WriteLine(student.IDStudentCard + ";" + studentPass.IDPass + ";" + studentPass.IDLibrary);
-            //}
-
-            //this.Close();
-
-            //throw new NotImplementedException();
         }
     }
 }

@@ -179,10 +179,10 @@ namespace Biblio
             }
             else
             {
-                string connectionString ="provider=Microsoft.Jet.OLEDB.4.0;" + "data source=L:\\ИИТ\\ООП\\Git\\UniversityGUI\\Biblio\\Biblio\\BD.mdb";
-                OleDbConnection myOleDbConnection = new OleDbConnection(connectionString);
-
+                var con = System.Configuration.ConfigurationManager.ConnectionStrings["DBConnect"];
+                OleDbConnection myOleDbConnection = new OleDbConnection(con.ConnectionString);
                 OleDbCommand myOleDbCommand = myOleDbConnection.CreateCommand();
+
 
                 myOleDbCommand.CommandText = "INSERT INTO Student ([IDStudentCard], [LastName], [Name], [SecondName], [Address], [PhoneNumber], [Faculty], [Course]) values ('" 
                     + IDCardBox.Text + "' , '" + LastNameBox.Text + "','" + NameBox.Text + "','" + SecondNameBox.Text
