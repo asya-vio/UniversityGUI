@@ -77,7 +77,7 @@ namespace Biblio
                     OleDbConnection myOleDbConnection1 = new OleDbConnection(connection1String);
                     OleDbCommand myOleDbCommand1 = myOleDbConnection1.CreateCommand();
 
-                    myOleDbCommand1.CommandText = "SELECT [InventoryNumber], [PublicationDate], [Presence] FROM BookExemplar";
+                    myOleDbCommand1.CommandText = "SELECT [InventoryNumber], [PublicationDate], [Presence] FROM BookExemplar where [Name] = '"+dr["Name"].ToString()+"' ";
 
                     myOleDbConnection1.Open();
 
