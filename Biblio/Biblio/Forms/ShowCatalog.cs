@@ -96,13 +96,16 @@ namespace Biblio
         {
             treeView.Nodes.Clear();
 
-            treeView = DBManager.GetBookTree();
+            var treeView1 = DBManager.GetBookTree();
+
+            foreach (TreeNode node in treeView1.Nodes)
+            {
+                treeView.Nodes.Add((TreeNode)node.Clone());
+            }
 
             Controls.Add(treeView);
 
         }
-
-
 
 
         void AddBookButton_Click(object sender, EventArgs e)
