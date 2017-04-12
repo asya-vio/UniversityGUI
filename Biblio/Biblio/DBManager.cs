@@ -158,5 +158,34 @@ namespace Biblio
 
             myOleDbCommand.ExecuteNonQuery();
         }
+
+        public static void WriteTeacher(Teacher teacher)
+        {
+
+            var con = System.Configuration.ConfigurationManager.ConnectionStrings["DBConnect"];
+            OleDbConnection myOleDbConnection = new OleDbConnection(con.ConnectionString);
+            OleDbCommand myOleDbCommand = myOleDbConnection.CreateCommand();
+
+            myOleDbCommand.CommandText = "INSERT INTO Teacher ([TeacherNumber], [LastName], [Name], [SecondName], [Address], [PhoneNumber], [Faculty], [Job]) values ('"
+                + teacher.TeacherNumber + "' , '" + teacher.LastName + "','" + teacher.Name + "','" + teacher.SecondName
+                + "','" + teacher.Address + "','" + teacher.PhoneNumber + "','" + teacher.Faculty + "','" + teacher.Job + "')";
+
+            myOleDbConnection.Open();
+
+            myOleDbCommand.ExecuteNonQuery();
+        }
+
+        public static void WriteTeacherPass(TeacherPass teacherPass)
+        {
+            var con = System.Configuration.ConfigurationManager.ConnectionStrings["DBConnect"];
+            OleDbConnection myOleDbConnection = new OleDbConnection(con.ConnectionString);
+            OleDbCommand myOleDbCommand = myOleDbConnection.CreateCommand();
+
+            myOleDbCommand.CommandText = "INSERT INTO TeacherPass ([IDPass], [IDLender], [IDTeacher]) values ('" 
+                + teacherPass.IDPass + "' , '" + teacherPass.IDLibrary + "','" + teacherPass.TeacherInfo.TeacherNumber + "')";
+            myOleDbConnection.Open();
+
+            myOleDbCommand.ExecuteNonQuery();
+        }
     }
 }

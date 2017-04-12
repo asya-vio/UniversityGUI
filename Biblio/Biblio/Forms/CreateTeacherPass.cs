@@ -92,14 +92,7 @@ namespace Biblio
             {
                 TeacherPass teacherPass = new TeacherPass(teacher, int.Parse(IDPassBox.Text), int.Parse(IDLenderBox.Text));
 
-                var con = System.Configuration.ConfigurationManager.ConnectionStrings["DBConnect"];
-                OleDbConnection myOleDbConnection = new OleDbConnection(con.ConnectionString);
-                OleDbCommand myOleDbCommand = myOleDbConnection.CreateCommand();
 
-                myOleDbCommand.CommandText = "INSERT INTO TeacherPass ([IDPass], [IDLender], [IDTeacher]) values ('" + IDPassBox.Text + "' , '" + IDLenderBox.Text + "','" + teacher.TeacherNumber + "')";
-                myOleDbConnection.Open();
-
-                myOleDbCommand.ExecuteNonQuery();
 
                 this.Close();
 
