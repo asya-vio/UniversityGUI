@@ -68,6 +68,7 @@
     <Compile Include="Classes\StudentPass.cs" />
     <Compile Include="Classes\Teacher.cs" />
     <Compile Include="Classes\TeacherPass.cs" />
+    <Compile Include="DBManager.cs" />
     <Compile Include="Forms\DeleteBook.cs">
       <SubType>Form</SubType>
     </Compile>

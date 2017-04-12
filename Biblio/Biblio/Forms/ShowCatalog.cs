@@ -16,6 +16,9 @@ namespace Biblio
         ListBox listBox;
         TreeView treeView;
         Button addBookButton;
+        Button deleteBookButton;
+        Button addExemplarBookButton;
+        Button deleteExemplarBookButton;
 
         public ShowCatalog()
         {
@@ -34,6 +37,7 @@ namespace Biblio
                 Height = 1000
             };
 
+           
 
 
             BackColor = Color.AntiqueWhite;
@@ -49,13 +53,44 @@ namespace Biblio
                 BackColor = Color.Azure
             };
 
+            this.deleteBookButton = new Button()
+            {
+                Location = new Point(1200, 100),
+                Width = 200,
+                Height = 150,
+                Text = "Удалить книгу",
+                BackColor = Color.Azure
+            };
+
+            this.addExemplarBookButton = new Button()
+            {
+                Location = new Point(900, 300),
+                Width = 200,
+                Height = 150,
+                Text = "Добавить экземпляр книги",
+                BackColor = Color.Azure
+            };
+
+            this.deleteExemplarBookButton = new Button()
+            {
+                Location = new Point(1200, 300),
+                Width = 200,
+                Height = 150,
+                Text = "Удалить экземпляр книги",
+                BackColor = Color.Azure
+            };
+
+
             Controls.Add(addBookButton);
+            Controls.Add(deleteBookButton);
+            Controls.Add(addExemplarBookButton);
+            Controls.Add(deleteExemplarBookButton);
             Controls.Add(treeView);
             addBookButton.Click += AddBookButton_Click;
+            deleteBookButton.Click += deleteBookButton_Click;
 
             ReadTree();
         }
-
 
             void ReadTree()
             {
@@ -77,7 +112,7 @@ namespace Biblio
                     while (dr.Read())
                     {
                         //listBox.Items.Add(dr["Name"] + " " + dr["Authors"]);
-                        treeView.Nodes.Add(dr["Name"].ToString() + " " + dr["Authors"].ToString());
+                        treeView.Nodes.Add("\"" + dr["Name"].ToString() +"\"" + dr["Authors"].ToString());
 
                         OleDbCommand myOleDbCommand2 = myOleDbConnection.CreateCommand();
                         myOleDbCommand2.CommandText = string.Format("{0}'{1}'",
@@ -138,6 +173,45 @@ namespace Biblio
 
             }
             Controls.Add(treeView);
+
+        }
+
+        void deleteBookButton_Click(object sender, EventArgs e)
+        {
+            var treeNodeRow = treeView.SelectedNode.ToString();
+
+            string name = "";
+
+            for (int i = 0; i < treeNodeRow.Length; i++)
+            {
+                if (treeNodeRow[i] == '"') 
+                {
+                    while (treeNodeRow[i] != '"')
+                    {
+                        i++;
+                        name += treeNodeRow[i];
+                    }
+
+                }
+                else continue;
+
+            }
+
+            var con = System.Configuration.ConfigurationManager.ConnectionStrings["DBConnect"];
+            OleDbConnection myOleDbConnection = new OleDbConnection(con.ConnectionString);
+            OleDbCommand myOleDbCommand = myOleDbConnection.CreateCommand();
+
+            myOleDbCommand.CommandText = string.Format("{0}'{1}'", "DELETE FROM Book WHERE [Name] = ", name);
+
+            myOleDbConnection.Open();
+
+            myOleDbCommand.ExecuteNonQuery();
+
+            myOleDbConnection.Close();
+
+            treeView.SelectedNode.Remove();
+
+
 
         }
 

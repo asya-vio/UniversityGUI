@@ -97,7 +97,6 @@ namespace Biblio
                 OleDbConnection myOleDbConnection = new OleDbConnection(con.ConnectionString);
                 OleDbCommand myOleDbCommand = myOleDbConnection.CreateCommand();
 
-
                 myOleDbCommand.CommandText = "INSERT INTO Book ([Name], [Authors]) values ('"
                     + nameBox.Text + "' , '" + authorsBox.Text + "')";
 

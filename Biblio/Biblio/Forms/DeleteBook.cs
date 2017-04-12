@@ -14,6 +14,7 @@ namespace Biblio
     public partial class DeleteBook : Form
     {
         TreeView treeView;
+       
 
         public DeleteBook(TreeView treeView)
         {
@@ -33,14 +34,31 @@ namespace Biblio
         private void TreeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
 
-            string name = sender.ToString();
+            string treeNodeRow = sender.ToString();
+            string name = "";
 
-            string connectionString =
-                       "provider=Microsoft.Jet.OLEDB.4.0;" + "data source=L:\\ИИТ\\ООП\\Git\\UniversityGUI\\Biblio\\Biblio\\BD.mdb";
-            OleDbConnection myOleDbConnection = new OleDbConnection(connectionString);
+            for (int i = 0; i < treeNodeRow.Length; i++)
+            {                
+                if (treeNodeRow[i] != '"') continue;
+                else
+                {                    
+                    while (treeNodeRow[i] != '"')
+                    {
+                        i++;
+                        name += treeNodeRow[i];
+                    }
+                }
+
+            }
+            //name.TrimEnd();
+
+
+
+            var con = System.Configuration.ConfigurationManager.ConnectionStrings["DBConnect"];
+            OleDbConnection myOleDbConnection = new OleDbConnection(con.ConnectionString);
             OleDbCommand myOleDbCommand = myOleDbConnection.CreateCommand();
 
-            myOleDbCommand.CommandText = "DELETE * FROM Book WHERE ";
+            myOleDbCommand.CommandText = "DELETE * FROM Book WHERE Name = '"+ name+"'";
 
             myOleDbConnection.Open();
 
