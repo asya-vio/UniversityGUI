@@ -51,7 +51,7 @@ namespace Biblio
 
                 while (dr.Read())
                 {
-                    resultString += ["Name"].ToString() + " \"  " + dr["Authors"].ToString();
+                    resultString += dr["Name"].ToString() + " \"  " + dr["Authors"].ToString();
                 }
 
             }
