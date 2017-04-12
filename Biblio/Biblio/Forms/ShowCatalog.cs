@@ -25,6 +25,10 @@ namespace Biblio
 
             InitializeComponent();
 
+            BackColor = Color.AntiqueWhite;
+            WindowState = FormWindowState.Maximized;
+            Font = new Font("Tahoma", 12, FontStyle.Regular);
+
             this.listBox = new ListBox
             {
                 Width = 600,
@@ -36,14 +40,7 @@ namespace Biblio
                 Width = 800,
                 Height = 1000
             };
-
-           
-
-
-            BackColor = Color.AntiqueWhite;
-            WindowState = FormWindowState.Maximized;
-            Font = new Font("Tahoma", 12, FontStyle.Regular);
-
+         
             this.addBookButton = new Button()
             {
                 Location = new Point(900, 100),
@@ -103,6 +100,8 @@ namespace Biblio
                 treeView.Nodes.Add((TreeNode)node.Clone());
             }
 
+            treeView1.Nodes.Clear();
+
             Controls.Add(treeView);
 
         }
@@ -122,24 +121,24 @@ namespace Biblio
 
         void deleteBookButton_Click(object sender, EventArgs e)
         {
-            var treeNodeRow = treeView.SelectedNode.ToString();
+            //var treeNodeRow = treeView.SelectedNode.Name.ToString();
 
-            string name = "";
+            string name = treeView.SelectedNode.Name.ToString();
 
-            for (int i = 0; i < treeNodeRow.Length; i++)
-            {
-                if (treeNodeRow[i] == '"') 
-                {
-                    while (treeNodeRow[i] != '"')
-                    {
-                        i++;
-                        name += treeNodeRow[i];
-                    }
+            //for (int i = 0; i < treeNodeRow.Length; i++)
+            //{
+            //    if (treeNodeRow[i] == '"') 
+            //    {
+            //        while (treeNodeRow[i] != '"')
+            //        {
+            //            i++;
+            //            name += treeNodeRow[i];
+            //        }
 
-                }
-                else continue;
+            //    }
+            //    else continue;
 
-            }
+            //}
 
             DBManager.DeleteBook(name);
 

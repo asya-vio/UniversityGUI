@@ -26,7 +26,7 @@ namespace Biblio
             OleDbConnection myOleDbConnection = new OleDbConnection(con.ConnectionString);
             OleDbCommand myOleDbCommand = myOleDbConnection.CreateCommand();
 
-            myOleDbCommand.CommandText = string.Format("{0}'{1}'", "DELETE FROM Book WHERE [Name] = ", name);
+            myOleDbCommand.CommandText = string.Format("{0}'{1}'", "DELETE * FROM Book WHERE [Name] = ", name);
 
             myOleDbConnection.Open();
 
@@ -82,8 +82,13 @@ namespace Biblio
             {
                 while (dr.Read())
                 {
+                    TreeNode newNode = new TreeNode();
+                    newNode.Text = "\"" + dr["Name"].ToString() + "\"  " + dr["Authors"].ToString();
+                    newNode.Name = dr["Name"].ToString();
 
-                    treeView.Nodes.Add("\"" + dr["Name"].ToString() + "\"  " + dr["Authors"].ToString());
+                    //treeView.Nodes.Add("\"" + dr["Name"].ToString() + "\"  " + dr["Authors"].ToString());
+
+                    treeView.Nodes.Add(newNode);
 
                     OleDbCommand myOleDbCommand2 = myOleDbConnection.CreateCommand();
                     myOleDbCommand2.CommandText = string.Format("{0}'{1}'",
@@ -101,6 +106,15 @@ namespace Biblio
                                 dr2["Presence"].ToString());
 
                             treeView.Nodes[n].Nodes.Add(text);
+
+                            //newNode.Text = string.Format("Инв. № {0}, Год издания: {1}, в наличии: {2}",
+                            //    dr2["InventoryNumber"].ToString(),
+                            //    dr2["PublicationDate"].ToString(),
+                            //    dr2["Presence"].ToString());
+
+                            //newNode.Value = dr2["InventoryNumber"].ToString();
+                            //treeView.Nodes[n].Nodes.Add(newNode);
+
                         }
                     }
                     dr2.Close();
