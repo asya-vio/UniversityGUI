@@ -20,6 +20,22 @@ namespace Biblio
             OleDbCommand myOleDbCommand = myOleDbConnection.CreateCommand();
         }
 
+        public static void WriteBook(Book book)
+        {
+
+            var con = System.Configuration.ConfigurationManager.ConnectionStrings["DBConnect"];
+            OleDbConnection myOleDbConnection = new OleDbConnection(con.ConnectionString);
+            OleDbCommand myOleDbCommand = myOleDbConnection.CreateCommand();
+
+            myOleDbCommand.CommandText = "INSERT INTO Book ([Name], [Authors]) values ('"
+                + book.Name + "' , '" + book.Author + "')";
+
+            myOleDbConnection.Open();
+
+            myOleDbCommand.ExecuteNonQuery();
+            myOleDbConnection.Close();
+        }
+
         public static void DeleteBook(string name)
         {
             var con = System.Configuration.ConfigurationManager.ConnectionStrings["DBConnect"];
@@ -62,6 +78,52 @@ namespace Biblio
 
             return resultString;
         }
+
+        public static void AddBookExemplar(string name, string inventoryNumber, string publicationDate, string presence)
+        {
+            var con = System.Configuration.ConfigurationManager.ConnectionStrings["DBConnect"];
+            OleDbConnection myOleDbConnection = new OleDbConnection(con.ConnectionString);
+            OleDbCommand myOleDbCommand = myOleDbConnection.CreateCommand();
+
+            myOleDbCommand.CommandText = "INSERT INTO BookExemplar ([InventoryNumber], [PublicationDate], [Presence], [Name]) values ('"
+                    + inventoryNumber + "' , '" + publicationDate + "' , '" + presence + "' , '" + name + "')"; // тут нужно как-то вписать имя книги, в которую записываем экземпляр
+
+            myOleDbConnection.Open();
+
+            myOleDbCommand.ExecuteNonQuery();
+            myOleDbConnection.Close();
+        }
+
+        public static string GetNewExemplar()
+        {
+            string resultString = "";
+
+            var con = System.Configuration.ConfigurationManager.ConnectionStrings["DBConnect"];
+            OleDbConnection myOleDbConnection = new OleDbConnection(con.ConnectionString);
+            OleDbCommand myOleDbCommand = myOleDbConnection.CreateCommand();
+
+            myOleDbCommand.CommandText = "SELECT top 1 [InventoryNumber], [PublicationDate], [Presence] FROM BookExemplar order by [Код] desc";
+
+            myOleDbConnection.Open();
+
+            OleDbDataReader dr = myOleDbCommand.ExecuteReader();
+
+            if (dr.HasRows)
+            {
+
+                while (dr.Read())
+                {
+                    resultString += string.Format("Инв. № {0}, Год издания: {1}, в наличии: {2}",
+                               dr["InventoryNumber"].ToString(),
+                               dr["PublicationDate"].ToString(),
+                               dr["Presence"].ToString());
+                }
+
+            }
+
+            return resultString;
+        }
+
 
         public static TreeView GetBookTree()
         {
@@ -187,5 +249,7 @@ namespace Biblio
 
             myOleDbCommand.ExecuteNonQuery();
         }
+
+
     }
 }

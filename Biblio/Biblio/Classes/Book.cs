@@ -9,16 +9,12 @@ namespace Biblio
     public class Book
     {
         public string Name;
-        public List<string> Author = new List<string>();
+        public string Author;
         public List<BookExemplar> ListOfExemplar = new List<BookExemplar>();
 
-        public Book(string name, string[] author)
+        public Book(string name, string author)
         {
             Name = name;
-
-            foreach (string a in author)
-                Author.Add(a);
-
         }
 
         public void AddExemplar(int PublicationDate, int InventoryNumber)

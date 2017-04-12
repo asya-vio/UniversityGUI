@@ -7,43 +7,58 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.OleDb;
 
 namespace Biblio
 {
-    public partial class CreateBook : Form
+    public partial class CreateBookExemplar : Form
     {
-        TextBox nameBox;
-        TextBox authorsBox;
+        TextBox inventoryNumberBox;
+        TextBox publicationDateBox;
+        TextBox presenceBox;
         Button okButton;
+        string Name;
 
-        public CreateBook()
+        public CreateBookExemplar(string name)
         {
             InitializeComponent();
+
+            this.Name = name;
 
             BackColor = Color.AntiqueWhite;
             //WindowState = FormWindowState.Maximized;
             this.Size = new Size(300, 500);
 
-            var nameLabel = new Label
+            var inventoryLabel = new Label
             {
-                Text = "Введите название ниги",
+                Text = "Введите инв. №",
                 Dock = DockStyle.Fill
             };
 
-            this.nameBox = new TextBox
+            this.inventoryNumberBox = new TextBox
             {
                 Width = 250,
                 Dock = DockStyle.Left
             };
 
-            var authorLabel = new Label
+            var publicationLabel = new Label
             {
-                Text = "Введите через запятую авторов книги",
+                Text = "Введите год издания",
                 Dock = DockStyle.Fill
             };
 
-            this.authorsBox = new TextBox
+            this.publicationDateBox = new TextBox
+            {
+                Width = 250,
+                Dock = DockStyle.Left
+            };
+
+            var presenceLabel = new Label
+            {
+                Text = "Наличие",
+                Dock = DockStyle.Fill
+            };
+
+            this.presenceBox = new TextBox
             {
                 Width = 250,
                 Dock = DockStyle.Left
@@ -57,11 +72,10 @@ namespace Biblio
                 Dock = DockStyle.Left
             };
 
-
             var table = new TableLayoutPanel();
             table.RowStyles.Clear();
             table.RowStyles.Add(new RowStyle(SizeType.Percent, 50));
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 7; i++)
             {
                 table.RowStyles.Add(new RowStyle(SizeType.AutoSize, 30));
             }
@@ -69,40 +83,36 @@ namespace Biblio
             table.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
 
             table.Controls.Add(new Panel(), 0, 0);
-            table.Controls.Add(nameLabel, 0, 1);
-            table.Controls.Add(nameBox, 0, 2);
-            table.Controls.Add(authorLabel, 0, 3);
-            table.Controls.Add(authorsBox, 0, 4);
-            table.Controls.Add(okButton, 0, 5);
-            table.Controls.Add(new Panel(), 0, 6);
+            table.Controls.Add(inventoryLabel, 0, 1);
+            table.Controls.Add(inventoryNumberBox, 0, 2);
+            table.Controls.Add(publicationLabel, 0, 3);
+            table.Controls.Add(publicationDateBox, 0, 4);
+            table.Controls.Add(presenceLabel, 0, 5);
+            table.Controls.Add(presenceBox, 0, 6);
+            table.Controls.Add(okButton, 0, 7);
+            table.Controls.Add(new Panel(), 0, 8);
 
             table.Dock = DockStyle.Fill;
             Controls.Add(table);
 
             okButton.Click += OkButton_Click;
-
-
-
         }
+
+
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(nameBox.Text) || string.IsNullOrWhiteSpace(authorsBox.Text))
+            if (string.IsNullOrWhiteSpace(inventoryNumberBox.Text) || string.IsNullOrWhiteSpace(publicationDateBox.Text)
+                || string.IsNullOrWhiteSpace(presenceBox.Text))
             {
                 MessageBox.Show("Не все поля заполнены!");
             }
-            else
-            {
-                Book book = new Book(nameBox.Text, authorsBox.Text);
 
-                DBManager.WriteBook(book);
+            DBManager.AddBookExemplar(Name, inventoryNumberBox.Text, publicationDateBox.Text, presenceBox.Text);
 
-                Form createBookExamplar = new CreateBookExemplar(nameBox.Text);
+            this.Close();
 
-                createBookExamplar.ShowDialog();
-
-                this.Close();
-            }
         }
     }
 }
+

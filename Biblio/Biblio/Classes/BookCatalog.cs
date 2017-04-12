@@ -35,13 +35,13 @@ namespace Biblio
                 throw new ArgumentException();
         }
 
-        private Book FindByAuthor(List<string> authors)
+        private Book FindByAuthor(string authors)
         {
             for (int i = 0; i < ListOfExpertiseArea.Count; i++)
             {
                 for (int j = 0; j < ListOfExpertiseArea[i].ListOfBook.Count; j++)
                 {
-                    if (ListOfExpertiseArea[i].ListOfBook[j].Author.SequenceEqual(authors))
+                    if (ListOfExpertiseArea[i].ListOfBook[j].Author == authors)
                         return ListOfExpertiseArea[i].ListOfBook[j];
                 }
             }
@@ -61,7 +61,7 @@ namespace Biblio
             throw new ArgumentException();
         }
 
-    public Book FindBook(int choice, List<string> authors, string name)
+    public Book FindBook(int choice, string authors, string name)
         {
             if (choice == 1)
             {

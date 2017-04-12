@@ -85,6 +85,8 @@ namespace Biblio
             Controls.Add(treeView);
             addBookButton.Click += AddBookButton_Click;
             deleteBookButton.Click += deleteBookButton_Click;
+            deleteBookButton.Click += deleteBookButton_Click;
+            addExemplarBookButton.Click += AddExemplarBookButton_Click;
 
             ReadTree();
         }
@@ -115,6 +117,10 @@ namespace Biblio
 
             treeView.Nodes.Add(DBManager.GetNewBook());
 
+            var numb = treeView.VisibleCount - 1;
+
+            treeView.Nodes[numb].Nodes.Add(DBManager.GetNewExemplar());
+
             Controls.Add(treeView);
 
         }
@@ -128,6 +134,20 @@ namespace Biblio
 
             treeView.SelectedNode.Remove();
 
+        }
+
+        private void AddExemplarBookButton_Click(object sender, EventArgs e)
+        {
+            string name = treeView.SelectedNode.Name.ToString();
+            var numb = treeView.SelectedNode.Level;
+
+            Form createBookExamplar = new CreateBookExemplar(name);
+
+            createBookExamplar.ShowDialog();          
+
+            treeView.Nodes[numb].Nodes.Add(DBManager.GetNewExemplar());
+
+            Controls.Add(treeView);
         }
 
 
