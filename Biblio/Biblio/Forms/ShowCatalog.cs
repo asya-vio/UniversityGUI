@@ -111,8 +111,8 @@ namespace Biblio
                 {
                     while (dr.Read())
                     {
-                        //listBox.Items.Add(dr["Name"] + " " + dr["Authors"]);
-                        treeView.Nodes.Add("\"" + dr["Name"].ToString() +"\"" + dr["Authors"].ToString());
+                        
+                        treeView.Nodes.Add("\"" + dr["Name"].ToString() +"\"  " + dr["Authors"].ToString());
 
                         OleDbCommand myOleDbCommand2 = myOleDbConnection.CreateCommand();
                         myOleDbCommand2.CommandText = string.Format("{0}'{1}'",
@@ -150,28 +150,8 @@ namespace Biblio
 
             createBook.ShowDialog();
 
+            treeView.Nodes.Add(DBManager.GetNewBook());
 
-            var con = System.Configuration.ConfigurationManager.ConnectionStrings["DBConnect"];
-            OleDbConnection myOleDbConnection = new OleDbConnection(con.ConnectionString);
-            OleDbCommand myOleDbCommand = myOleDbConnection.CreateCommand();
-
-            myOleDbCommand.CommandText = "SELECT top 1 [Name], [Authors] FROM Book order by [Код] desc";
-
-            myOleDbConnection.Open();
-
-            OleDbDataReader dr = myOleDbCommand.ExecuteReader();
-
-            if (dr.HasRows)
-            {
-
-                while (dr.Read())
-                {
-
-                    treeView.Nodes.Add(dr["Name"].ToString() + " " + dr["Authors"].ToString());
-                    
-                }
-
-            }
             Controls.Add(treeView);
 
         }
@@ -197,21 +177,9 @@ namespace Biblio
 
             }
 
-            var con = System.Configuration.ConfigurationManager.ConnectionStrings["DBConnect"];
-            OleDbConnection myOleDbConnection = new OleDbConnection(con.ConnectionString);
-            OleDbCommand myOleDbCommand = myOleDbConnection.CreateCommand();
-
-            myOleDbCommand.CommandText = string.Format("{0}'{1}'", "DELETE FROM Book WHERE [Name] = ", name);
-
-            myOleDbConnection.Open();
-
-            myOleDbCommand.ExecuteNonQuery();
-
-            myOleDbConnection.Close();
+            DBManager.DeleteBook(name);
 
             treeView.SelectedNode.Remove();
-
-
 
         }
 

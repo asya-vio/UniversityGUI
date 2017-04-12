@@ -31,5 +31,32 @@ namespace Biblio
             myOleDbConnection.Close();
 
         }
+
+        public static string GetNewBook()
+        {
+            string resultString = "";
+
+            var con = System.Configuration.ConfigurationManager.ConnectionStrings["DBConnect"];
+            OleDbConnection myOleDbConnection = new OleDbConnection(con.ConnectionString);
+            OleDbCommand myOleDbCommand = myOleDbConnection.CreateCommand();
+
+            myOleDbCommand.CommandText = "SELECT top 1 [Name], [Authors] FROM Book order by [Код] desc";
+
+            myOleDbConnection.Open();
+
+            OleDbDataReader dr = myOleDbCommand.ExecuteReader();
+
+            if (dr.HasRows)
+            {
+
+                while (dr.Read())
+                {
+                    resultString += ["Name"].ToString() + " \"  " + dr["Authors"].ToString();
+                }
+
+            }
+
+            return resultString;
+        }
     }
 }
