@@ -116,9 +116,13 @@ namespace Biblio
 
             treeView.Nodes.Add(DBManager.GetNewBook());
 
-            var numb = treeView.VisibleCount - 1;
+            //var numb = treeView.VisibleCount - 1;
 
-            treeView.Nodes[numb].Nodes.Add(DBManager.GetNewExemplar());
+            int numb = 0;
+
+            foreach (TreeNode node in treeView.Nodes) numb++;
+
+            treeView.Nodes[numb-1].Nodes.Add(DBManager.GetNewExemplar());
 
             Controls.Add(treeView);
 
