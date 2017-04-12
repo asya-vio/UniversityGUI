@@ -9,17 +9,26 @@ namespace Biblio
 {
     public static class DBManager
     {
-        private void OpenConnection()
+        private static void OpenConnection()
         {
             var con = System.Configuration.ConfigurationManager.ConnectionStrings["DBConnect"];
             OleDbConnection myOleDbConnection = new OleDbConnection(con.ConnectionString);
             OleDbCommand myOleDbCommand = myOleDbConnection.CreateCommand();
         }
 
-        public void DeleteBook(string name)
+        public static void DeleteBook(string name)
         {
-            OpenConnection();
+            var con = System.Configuration.ConfigurationManager.ConnectionStrings["DBConnect"];
+            OleDbConnection myOleDbConnection = new OleDbConnection(con.ConnectionString);
+            OleDbCommand myOleDbCommand = myOleDbConnection.CreateCommand();
 
+            myOleDbCommand.CommandText = string.Format("{0}'{1}'", "DELETE FROM Book WHERE [Name] = ", name);
+
+            myOleDbConnection.Open();
+
+            myOleDbCommand.ExecuteNonQuery();
+
+            myOleDbConnection.Close();
 
         }
     }
