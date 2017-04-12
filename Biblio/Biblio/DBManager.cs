@@ -52,9 +52,9 @@ namespace Biblio
 
         }
 
-        public static string GetNewBook()
+        public static TreeNode GetNewBook()
         {
-            string resultString = "";
+            TreeNode newNode = new TreeNode();
 
             var con = System.Configuration.ConfigurationManager.ConnectionStrings["DBConnect"];
             OleDbConnection myOleDbConnection = new OleDbConnection(con.ConnectionString);
@@ -71,12 +71,15 @@ namespace Biblio
 
                 while (dr.Read())
                 {
-                    resultString += dr["Name"].ToString() + " \"  " + dr["Authors"].ToString();
+                    newNode.Text  = dr["Name"].ToString() + " \"  " + dr["Authors"].ToString();
+                    newNode.Name = dr["Name"].ToString();
                 }
 
             }
 
-            return resultString;
+            myOleDbConnection.Close();
+
+            return newNode;
         }
 
         public static void AddBookExemplar(string name, string inventoryNumber, string publicationDate, string presence)

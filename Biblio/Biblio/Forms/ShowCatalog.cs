@@ -130,7 +130,7 @@ namespace Biblio
 
             string name = treeView.SelectedNode.Name.ToString();
 
-            DBManager.DeleteBook(name);
+            //DBManager.DeleteBook(name);
 
             treeView.SelectedNode.Remove();
 
@@ -139,13 +139,12 @@ namespace Biblio
         private void AddExemplarBookButton_Click(object sender, EventArgs e)
         {
             string name = treeView.SelectedNode.Name.ToString();
-            var numb = treeView.SelectedNode.Level;
 
             Form createBookExamplar = new CreateBookExemplar(name);
 
-            createBookExamplar.ShowDialog();          
+            createBookExamplar.ShowDialog();
 
-            treeView.Nodes[numb].Nodes.Add(DBManager.GetNewExemplar());
+            treeView.SelectedNode.Nodes.Add(DBManager.GetNewExemplar());
 
             Controls.Add(treeView);
         }
