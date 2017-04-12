@@ -127,12 +127,10 @@ namespace Biblio
 
         void deleteBookButton_Click(object sender, EventArgs e)
         {
-
+            treeView.SelectedNode.Remove();
             string name = treeView.SelectedNode.Name.ToString();
 
-            //DBManager.DeleteBook(name);
-
-            treeView.SelectedNode.Remove();
+            DBManager.DeleteBook(name);
 
         }
 
@@ -148,6 +146,17 @@ namespace Biblio
 
             Controls.Add(treeView);
         }
+
+        //private void DeleteExemplarBookButton_Click(object sender, EventArgs e) 
+        //{ 
+        // string name = treeView.SelectedNode.Name.ToString(); 
+
+        // //DBManager.DeleteBookExemplar(name); 
+
+        // treeView.SelectedNode.Remove(); 
+        //}
+
+
 
 
     }
