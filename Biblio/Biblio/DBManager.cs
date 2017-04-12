@@ -127,5 +127,36 @@ namespace Biblio
 
             return treeView;
         }
+
+        public static void WriteStudent(Student student)
+        {
+
+            var con = System.Configuration.ConfigurationManager.ConnectionStrings["DBConnect"];
+            OleDbConnection myOleDbConnection = new OleDbConnection(con.ConnectionString);
+            OleDbCommand myOleDbCommand = myOleDbConnection.CreateCommand();
+
+
+            myOleDbCommand.CommandText = "INSERT INTO Student ([IDStudentCard], [LastName], [Name], [SecondName], [Address], [PhoneNumber], [Faculty], [Course]) values ('"
+                + student.IDStudentCard + "' , '" + student.LastName + "','" + student.Name + "','" + student.SecondName
+                + "','" + student.Address + "','" + student.PhoneNumber + "','" + student.Faculty + "','" + student.Course + "')";
+
+            myOleDbConnection.Open();
+
+            myOleDbCommand.ExecuteNonQuery();
+        }
+
+        public static void WriteStudentPass(StudentPass studentPass)
+        {
+
+            var con = System.Configuration.ConfigurationManager.ConnectionStrings["DBConnect"];
+            OleDbConnection myOleDbConnection = new OleDbConnection(con.ConnectionString);
+            OleDbCommand myOleDbCommand = myOleDbConnection.CreateCommand();
+
+            myOleDbCommand.CommandText = "INSERT INTO StudentPass ([IDPass], [IDLender], [IDStudent]) values ('" + studentPass.IDPass +
+                "' , '" + studentPass.IDLibrary + "','" + studentPass.StudentInfo.IDStudentCard + "')";
+            myOleDbConnection.Open();
+
+            myOleDbCommand.ExecuteNonQuery();
+        }
     }
 }

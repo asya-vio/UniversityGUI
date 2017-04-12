@@ -121,24 +121,8 @@ namespace Biblio
 
         void deleteBookButton_Click(object sender, EventArgs e)
         {
-            //var treeNodeRow = treeView.SelectedNode.Name.ToString();
 
             string name = treeView.SelectedNode.Name.ToString();
-
-            //for (int i = 0; i < treeNodeRow.Length; i++)
-            //{
-            //    if (treeNodeRow[i] == '"') 
-            //    {
-            //        while (treeNodeRow[i] != '"')
-            //        {
-            //            i++;
-            //            name += treeNodeRow[i];
-            //        }
-
-            //    }
-            //    else continue;
-
-            //}
 
             DBManager.DeleteBook(name);
 

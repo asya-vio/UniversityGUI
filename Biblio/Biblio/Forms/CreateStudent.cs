@@ -179,25 +179,13 @@ namespace Biblio
             }
             else
             {
-                var con = System.Configuration.ConfigurationManager.ConnectionStrings["DBConnect"];
-                OleDbConnection myOleDbConnection = new OleDbConnection(con.ConnectionString);
-                OleDbCommand myOleDbCommand = myOleDbConnection.CreateCommand();
-
-
-                myOleDbCommand.CommandText = "INSERT INTO Student ([IDStudentCard], [LastName], [Name], [SecondName], [Address], [PhoneNumber], [Faculty], [Course]) values ('" 
-                    + IDCardBox.Text + "' , '" + LastNameBox.Text + "','" + NameBox.Text + "','" + SecondNameBox.Text
-                    + "','" + AddressBox.Text + "','" + PhoneNumberBox.Text + "','" + FacultyBox.Text + "','" + int.Parse(CourseBox.Text) + "')";
-
-                myOleDbConnection.Open();
-
-                myOleDbCommand.ExecuteNonQuery();
-
                 Student student = new Student(LastNameBox.Text, NameBox.Text, SecondNameBox.Text,
-                      AddressBox.Text, PhoneNumberBox.Text, int.Parse(IDCardBox.Text), FacultyBox.Text, int.Parse(CourseBox.Text));
+                       AddressBox.Text, PhoneNumberBox.Text, int.Parse(IDCardBox.Text), FacultyBox.Text, int.Parse(CourseBox.Text));
+
+                DBManager.WriteStudent(student);
 
                 Form studentPass = new CreateStudentPass(student);
                 studentPass.ShowDialog();
-
 
             }
 
