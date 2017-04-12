@@ -92,57 +92,18 @@ namespace Biblio
             ReadTree();
         }
 
-            void ReadTree()
-            {
-                treeView.Nodes.Clear();
+        void ReadTree()
+        {
+            treeView.Nodes.Clear();
 
-                var con = System.Configuration.ConfigurationManager.ConnectionStrings["DBConnect"];
-                OleDbConnection myOleDbConnection = new OleDbConnection(con.ConnectionString);
+            treeView = DBManager.GetBookTree();
 
-                myOleDbConnection.Open();
+            Controls.Add(treeView);
 
-                OleDbCommand myOleDbCommand = myOleDbConnection.CreateCommand();
-                myOleDbCommand.CommandText = "SELECT [Name], [Authors] FROM Book";
-                OleDbDataReader dr = myOleDbCommand.ExecuteReader();
-
-                int n = 0;
-
-                if (dr.HasRows)
-                {
-                    while (dr.Read())
-                    {
-                        
-                        treeView.Nodes.Add("\"" + dr["Name"].ToString() +"\"  " + dr["Authors"].ToString());
-
-                        OleDbCommand myOleDbCommand2 = myOleDbConnection.CreateCommand();
-                        myOleDbCommand2.CommandText = string.Format("{0}'{1}'",
-                            "SELECT [PublicationDate], [InventoryNumber], [Presence] FROM BookExemplar WHERE Name = ",
-                            dr["Name"].ToString());
-                        OleDbDataReader dr2 = myOleDbCommand2.ExecuteReader();
-
-                        if (dr2.HasRows)
-                        {
-                            while (dr2.Read())
-                            {
-                                string text = string.Format("Инв. № {0}, Год издания: {1}, в наличии: {2}",
-                                    dr2["InventoryNumber"].ToString(),
-                                    dr2["PublicationDate"].ToString(),
-                                    dr2["Presence"].ToString());
-
-                                treeView.Nodes[n].Nodes.Add(text);
-                            }
-                        }
-                        dr2.Close();
-                        n++;
-                    }
-                }
-
-                dr.Close();
-                myOleDbConnection.Close();
-            }
+        }
 
 
-    
+
 
         void AddBookButton_Click(object sender, EventArgs e)
         {
