@@ -96,11 +96,15 @@ namespace Biblio
 
             var treeView1 = DBManager.GetBookTree();
 
+            //foreach (TreeNode node in treeView1.Nodes)
+            //{
+            //    treeView.Nodes.Add((TreeNode)node.Clone());
+            //}
+
             foreach (TreeNode node in treeView1.Nodes)
             {
-                treeView.Nodes.Add((TreeNode)node.Clone());
+                treeView.Nodes.Add(node);
             }
-
             treeView1.Nodes.Clear();
 
             Controls.Add(treeView);
@@ -115,8 +119,6 @@ namespace Biblio
             createBook.ShowDialog();
 
             treeView.Nodes.Add(DBManager.GetNewBook());
-
-            //var numb = treeView.VisibleCount - 1;
 
             int numb = 0;
 
@@ -151,14 +153,14 @@ namespace Biblio
             Controls.Add(treeView);
         }
 
-        //private void DeleteExemplarBookButton_Click(object sender, EventArgs e) 
-        //{ 
-        // string name = treeView.SelectedNode.Name.ToString(); 
+        private void DeleteExemplarBookButton_Click(object sender, EventArgs e)
+        {
+            string inventoryNumber = treeView.SelectedNode.Name.ToString();
 
-        // //DBManager.DeleteBookExemplar(name); 
+            DBManager.DeleteBookExemplar(inventoryNumber); 
 
-        // treeView.SelectedNode.Remove(); 
-        //}
+            treeView.SelectedNode.Remove();
+        }
 
 
 

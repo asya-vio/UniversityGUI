@@ -151,8 +151,6 @@ namespace Biblio
                     newNode.Text = "\"" + dr["Name"].ToString() + "\"  " + dr["Authors"].ToString();
                     newNode.Name = dr["Name"].ToString();
 
-                    //treeView.Nodes.Add("\"" + dr["Name"].ToString() + "\"  " + dr["Authors"].ToString());
-
                     treeView.Nodes.Add(newNode);
 
                     OleDbCommand myOleDbCommand2 = myOleDbConnection.CreateCommand();
@@ -165,20 +163,20 @@ namespace Biblio
                     {
                         while (dr2.Read())
                         {
-                            string text = string.Format("Инв. № {0}, Год издания: {1}, в наличии: {2}",
-                                dr2["InventoryNumber"].ToString(),
-                                dr2["PublicationDate"].ToString(),
-                                dr2["Presence"].ToString());
-
-                            treeView.Nodes[n].Nodes.Add(text);
-
-                            //newNode.Text = string.Format("Инв. № {0}, Год издания: {1}, в наличии: {2}",
+                            //string text = string.Format("Инв. № {0}, Год издания: {1}, в наличии: {2}",
                             //    dr2["InventoryNumber"].ToString(),
                             //    dr2["PublicationDate"].ToString(),
                             //    dr2["Presence"].ToString());
 
-                            //newNode.Value = dr2["InventoryNumber"].ToString();
-                            //treeView.Nodes[n].Nodes.Add(newNode);
+                            //treeView.Nodes[n].Nodes.Add(text);
+
+                            newNode.Text = string.Format("Инв. № {0}, Год издания: {1}, в наличии: {2}",
+                                dr2["InventoryNumber"].ToString(),
+                                dr2["PublicationDate"].ToString(),
+                                dr2["Presence"].ToString());
+
+                            newNode.Name = dr2["InventoryNumber"].ToString();
+                            treeView.Nodes[n].Nodes.Add(newNode);
 
                         }
                     }
@@ -253,14 +251,14 @@ namespace Biblio
             myOleDbCommand.ExecuteNonQuery();
         }
 
-        //public static void DeleteBookExemplar(name) 
-        //{ 
-        // var con = System.Configuration.ConfigurationManager.ConnectionStrings["DBConnect"]; 
-        // OleDbConnection myOleDbConnection = new OleDbConnection(con.ConnectionString); 
-        // OleDbCommand myOleDbCommand = myOleDbConnection.CreateCommand(); 
+        public static void DeleteBookExemplar(string inventoryNumber)
+        {
+            var con = System.Configuration.ConfigurationManager.ConnectionStrings["DBConnect"];
+            OleDbConnection myOleDbConnection = new OleDbConnection(con.ConnectionString);
+            OleDbCommand myOleDbCommand = myOleDbConnection.CreateCommand();
 
-        // myOleDbCommand.CommandText = string.Format("{0}'{1}'", "DELETE * FROM BookExemplar WHERE [Name] = ", name); 
-        //}
+            myOleDbCommand.CommandText = string.Format("{0}'{1}'", "DELETE * FROM BookExemplar WHERE [InventoryNumber] = ", int.Parse(inventoryNumber));
+        }
 
 
     }
