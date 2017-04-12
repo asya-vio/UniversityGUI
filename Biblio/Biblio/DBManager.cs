@@ -253,6 +253,15 @@ namespace Biblio
             myOleDbCommand.ExecuteNonQuery();
         }
 
+        //public static void DeleteBookExemplar(name) 
+        //{ 
+        // var con = System.Configuration.ConfigurationManager.ConnectionStrings["DBConnect"]; 
+        // OleDbConnection myOleDbConnection = new OleDbConnection(con.ConnectionString); 
+        // OleDbCommand myOleDbCommand = myOleDbConnection.CreateCommand(); 
+
+        // myOleDbCommand.CommandText = string.Format("{0}'{1}'", "DELETE * FROM BookExemplar WHERE [Name] = ", name); 
+        //}
+
 
     }
 }

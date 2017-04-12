@@ -85,7 +85,6 @@ namespace Biblio
             Controls.Add(treeView);
             addBookButton.Click += AddBookButton_Click;
             deleteBookButton.Click += deleteBookButton_Click;
-            deleteBookButton.Click += deleteBookButton_Click;
             addExemplarBookButton.Click += AddExemplarBookButton_Click;
 
             ReadTree();
@@ -127,10 +126,11 @@ namespace Biblio
 
         void deleteBookButton_Click(object sender, EventArgs e)
         {
-            treeView.SelectedNode.Remove();
             string name = treeView.SelectedNode.Name.ToString();
 
             DBManager.DeleteBook(name);
+
+            treeView.SelectedNode.Remove();
 
         }
 
